@@ -41,3 +41,4 @@
 43_fedora-xephyr-keysym-madness.diff
 44_kdrive-ephyr-free-screen-struct.patch
 45_CVE-2007-1003.diff -p0
+46_security_fdo-bug-7447.diff
