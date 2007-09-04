@@ -1,9 +1,9 @@
-xorg-server (2:1.1.1-21etch1) UNRELEASED; urgency=low
+xorg-server (2:1.1.1-21etch1) stable-security; urgency=high
 
   * Add patch to fix a buffer overflow in the composite extension
     (freedesktop.org bug#7447).
 
- -- Julien Cristau <jcristau@debian.org>  Mon, 03 Sep 2007 16:45:42 +0200
+ -- Julien Cristau <jcristau@debian.org>  Tue, 04 Sep 2007 03:11:21 +0200
 
 xorg-server (2:1.1.1-21) unstable; urgency=emergency
 
