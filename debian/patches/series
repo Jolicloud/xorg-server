@@ -11,6 +11,7 @@
 11_define_XFree86Server.diff
 12_security_policy_in_etc.diff
 13_debian_add_xkbpath_env_variable.diff
+14_CVE-2007-4730.diff
 16_s390_fix.diff
 21_glx_align_fixes.patch
 23_kfreebsd_support.diff
