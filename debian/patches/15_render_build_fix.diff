@@ -1,0 +1,14 @@
+Index: xorg-server/render/picturestr.h
+===================================================================
+--- xorg-server.orig/render/picturestr.h	2007-10-20 12:22:55.000000000 +0200
++++ xorg-server/render/picturestr.h	2007-10-20 12:23:07.000000000 +0200
+@@ -26,8 +26,8 @@
+ #ifndef _PICTURESTR_H_
+ #define _PICTURESTR_H_
+ 
+-#include "glyphstr.h"
+ #include "scrnintstr.h"
++#include "glyphstr.h"
+ #include "resource.h"
+ 
+ typedef struct _DirectFormat {
