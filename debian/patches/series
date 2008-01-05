@@ -42,3 +42,10 @@
 44_kdrive-ephyr-free-screen-struct.patch
 45_CVE-2007-1003.diff -p0
 46_security_fdo-bug-7447.diff
+47_CVE-2007-6427.diff
+48_CVE-2007-6428.diff
+49_CVE-2007-6429-EVI.diff
+50_CVE-2007-6429-MIT-SHM.diff
+51_CVE-2007-5760.diff
+52_bug-13526.diff
+53_CVE-2007-5958.diff

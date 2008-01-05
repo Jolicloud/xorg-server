@@ -1,3 +1,16 @@
+xorg-server (2:1.1.1-21etch2) UNRELEASED; urgency=high
+
+  * Security update, fixes the following vulnerabilities:
+    + CVE-2007-6427: XInput Extension Memory Corruption (fd.o bug#13522)
+    + CVE-2007-6428: TOG-CUP Extension Memory Corruption (fd.o bug#13523)
+    + CVE-2007-6429: EVI Extension Integer Overflow (fd.o bug#13519),
+                     MIT-SHM Extension Integer Overflow (fd.o bug#13520)
+    + CVE-2007-5760: XFree86-Misc Extension Invalid Array Index (fd.o bug#13524)
+    + PCF font parser buffer overflow (fd.o bug#13526)
+    + CVE-2007-5958: file existence disclosure (fd.o bug#13706)
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 06 Jan 2008 17:57:26 +0100
+
 xorg-server (2:1.1.1-21etch1) stable-security; urgency=high
 
   * Add patch to fix a buffer overflow in the composite extension

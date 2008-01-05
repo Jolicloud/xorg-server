@@ -1,0 +1,18 @@
+Index: xorg-server/dix/dixfonts.c
+===================================================================
+--- xorg-server.orig/dix/dixfonts.c	2008-01-05 14:54:17.000000000 +0100
++++ xorg-server/dix/dixfonts.c	2008-01-05 14:54:22.000000000 +0100
+@@ -336,6 +336,13 @@
+ 	err = BadFontName;
+ 	goto bail;
+     }
++    /* check values for firstCol, lastCol, firstRow, and lastRow */
++    if (pfont->info.firstCol > pfont->info.lastCol ||
++       pfont->info.firstRow > pfont->info.lastRow ||
++       pfont->info.lastCol - pfont->info.firstCol > 255) {
++       err = AllocError;
++       goto bail;
++    }
+     if (!pfont->fpe)
+ 	pfont->fpe = fpe;
+     pfont->refcnt++;
