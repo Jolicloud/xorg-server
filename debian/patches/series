@@ -31,6 +31,13 @@
 49_map_keyboard_driver_to_kbd.diff -p0
 50_alpha_no_include_asm_pci.h.diff
 51_xkb-and-loathing.diff
+52_CVE-2007-5760.diff
+53_CVE-2007-5958.diff
+54_CVE-2008-0006.diff
+55_CVE-2007-6429_EVI.diff
+56_CVE-2007-6429_MIT-SHM.diff
+57_CVE-2007-6427.diff
+58_CVE-2007-6428.diff
 91_ttf2pt1
 91_ttf2pt1_updates
 92_xprint-security-holes-fix.patch

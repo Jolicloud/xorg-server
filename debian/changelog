@@ -1,3 +1,16 @@
+xorg-server (2:1.3.0.0.dfsg-12lenny2) UNRELEASED; urgency=high
+
+  * Security update, fixes multiple vulnerabilities
+    + CVE-2007-5760: XFree86-Misc Extension Invalid Array Index (fd.o bug#13524)
+    + CVE-2007-5958: file existence disclosure (fd.o bug#13706)
+    + CVE-2007-6427: XInput Extension Memory Corruption (fd.o bug#13522)
+    + CVE-2007-6428: TOG-CUP Extension Memory Corruption (fd.o bug#13523)
+    + CVE-2007-6429: EVI Extension Integer Overflow (fd.o bug#13519),
+                     MIT-SHM Extension Integer Overflow (fd.o bug#13520)
+    + CVE-2008-0006: PCF font parser buffer overflow (fd.o bug#12946)
+
+ -- Julien Cristau <jcristau@debian.org>  Sat, 05 Jan 2008 13:19:20 +0100
+
 xorg-server (2:1.3.0.0.dfsg-12lenny1) testing-security; urgency=low
 
   * Add new patch (14_CVE-2007-4730.diff) cherry-picked from 1.4 to fix a
