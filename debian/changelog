@@ -1,4 +1,4 @@
-xorg-server (2:1.1.1-21etch2) UNRELEASED; urgency=high
+xorg-server (2:1.1.1-21etch2) stable-security; urgency=high
 
   * Security update, fixes the following vulnerabilities:
     + CVE-2007-6427: XInput Extension Memory Corruption (fd.o bug#13522)
@@ -9,7 +9,7 @@ xorg-server (2:1.1.1-21etch2) UNRELEASED; urgency=high
     + PCF font parser buffer overflow (fd.o bug#13526)
     + CVE-2007-5958: file existence disclosure (fd.o bug#13706)
 
- -- Julien Cristau <jcristau@debian.org>  Sun, 06 Jan 2008 17:57:26 +0100
+ -- Julien Cristau <jcristau@debian.org>  Mon, 07 Jan 2008 13:14:19 +0100
 
 xorg-server (2:1.1.1-21etch1) stable-security; urgency=high
 
