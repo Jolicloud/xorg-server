@@ -1,3 +1,10 @@
+xorg-server (2:1.1.1-21etch3) stable-security; urgency=high
+
+  * Add patch by Adam Jackson from Red Hat to fix regression introduced by the
+    MIT-SHM patch in -21etch2 (closes: #461410).
+
+ -- Julien Cristau <jcristau@debian.org>  Fri, 18 Jan 2008 20:39:28 +0100
+
 xorg-server (2:1.1.1-21etch2) stable-security; urgency=high
 
   * Security update, fixes the following vulnerabilities:
