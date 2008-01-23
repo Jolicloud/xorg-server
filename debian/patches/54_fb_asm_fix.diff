@@ -1,0 +1,28 @@
+Fix jumps to local labels in inline asm.
+This fixes a SIGILL on CPUs without the cpuid instruction
+Debian bug#353494
+
+This patch by Michael Karcher <karcher@physik.fu-berlin.de>
+
+Index: xorg-server/fb/fbpict.c
+===================================================================
+--- xorg-server.orig/fb/fbpict.c	2008-01-23 18:11:23.000000000 +0100
++++ xorg-server/fb/fbpict.c	2008-01-23 18:11:42.000000000 +0100
+@@ -1378,7 +1378,7 @@
+              "pop %%eax\n"
+              "mov $0x0, %%edx\n"
+              "xor %%ecx, %%eax\n"
+-             "jz 1\n"
++             "jz 1f\n"
+ 
+              "mov $0x00000000, %%eax\n"
+ 	     "push %%ebx\n"
+@@ -1422,7 +1422,7 @@
+                     "cpuid\n"
+                     "xor %%edx, %%edx\n"
+                     "cmp $0x1, %%eax\n"
+-                    "jge 2\n"
++                    "jge 2f\n"
+                     "mov $0x80000001, %%eax\n"
+                     "cpuid\n"
+                     "2:\n"
