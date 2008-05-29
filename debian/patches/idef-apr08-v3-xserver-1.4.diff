@@ -1,0 +1,202 @@
+--- xorg-server.orig/Xext/security.c
++++ xorg-server/Xext/security.c
+@@ -652,15 +652,19 @@
+     register char 	n;
+     CARD32 *values;
+     unsigned long nvalues;
++    int values_offset;
+ 
+     swaps(&stuff->length, n);
+     REQUEST_AT_LEAST_SIZE(xSecurityGenerateAuthorizationReq);
+     swaps(&stuff->nbytesAuthProto, n);
+     swaps(&stuff->nbytesAuthData, n);
+     swapl(&stuff->valueMask, n);
+-    values = (CARD32 *)(&stuff[1]) +
+-	((stuff->nbytesAuthProto + (unsigned)3) >> 2) +
+-	((stuff->nbytesAuthData + (unsigned)3) >> 2);
++    values_offset = ((stuff->nbytesAuthProto + (unsigned)3) >> 2) +
++		    ((stuff->nbytesAuthData + (unsigned)3) >> 2);
++    if (values_offset > 
++	stuff->length - (sz_xSecurityGenerateAuthorizationReq >> 2))
++	return BadLength;
++    values = (CARD32 *)(&stuff[1]) + values_offset;
+     nvalues = (((CARD32 *)stuff) + stuff->length) - values;
+     SwapLongs(values, nvalues);
+     return ProcSecurityGenerateAuthorization(client);
+--- xorg-server.orig/Xext/shm.c
++++ xorg-server/Xext/shm.c
+@@ -861,8 +861,17 @@
+         return BadValue;
+     }
+ 
+-    VERIFY_SHMSIZE(shmdesc, stuff->offset, length * stuff->totalHeight,
+-		   client);
++    /* 
++     * There's a potential integer overflow in this check:
++     * VERIFY_SHMSIZE(shmdesc, stuff->offset, length * stuff->totalHeight,
++     *                client);
++     * the version below ought to avoid it
++     */
++    if (stuff->totalHeight != 0 && 
++	length > (shmdesc->size - stuff->offset)/stuff->totalHeight) {
++	client->errorValue = stuff->totalWidth;
++	return BadValue;
++    }
+     if (stuff->srcX > stuff->totalWidth)
+     {
+ 	client->errorValue = stuff->srcX;
+--- xorg-server.orig/record/record.c
++++ xorg-server/record/record.c
+@@ -2659,7 +2659,7 @@
+ } /* SProcRecordQueryVersion */
+ 
+ 
+-static void
++static int
+ SwapCreateRegister(xRecordRegisterClientsReq *stuff)
+ {
+     register char n;
+@@ -2670,11 +2670,17 @@
+     swapl(&stuff->nClients, n);
+     swapl(&stuff->nRanges, n);
+     pClientID = (XID *)&stuff[1];
++    if (stuff->nClients > stuff->length - (sz_xRecordRegisterClientsReq >> 2))
++	return BadLength;
+     for (i = 0; i < stuff->nClients; i++, pClientID++)
+     {
+ 	swapl(pClientID, n);
+     }
++    if (stuff->nRanges > stuff->length - (sz_xRecordRegisterClientsReq >> 2)
++	- stuff->nClients)
++	return BadLength;
+     RecordSwapRanges((xRecordRange *)pClientID, stuff->nRanges);
++    return Success;
+ } /* SwapCreateRegister */
+ 
+ 
+@@ -2682,11 +2688,13 @@
+ SProcRecordCreateContext(ClientPtr client)
+ {
+     REQUEST(xRecordCreateContextReq);
++    int			status;
+     register char 	n;
+ 
+     swaps(&stuff->length, n);
+     REQUEST_AT_LEAST_SIZE(xRecordCreateContextReq);
+-    SwapCreateRegister((pointer)stuff);
++    if ((status = SwapCreateRegister((pointer)stuff)) != Success)
++	return status;
+     return ProcRecordCreateContext(client);
+ } /* SProcRecordCreateContext */
+ 
+@@ -2695,11 +2703,13 @@
+ SProcRecordRegisterClients(ClientPtr client)
+ {
+     REQUEST(xRecordRegisterClientsReq);
++    int			status;
+     register char 	n;
+ 
+     swaps(&stuff->length, n);
+     REQUEST_AT_LEAST_SIZE(xRecordRegisterClientsReq);
+-    SwapCreateRegister((pointer)stuff);
++    if ((status = SwapCreateRegister((pointer)stuff)) != Success)
++	return status;
+     return ProcRecordRegisterClients(client);
+ } /* SProcRecordRegisterClients */
+ 
+--- xorg-server.orig/render/glyph.c
++++ xorg-server/render/glyph.c
+@@ -43,6 +43,8 @@
+ #include "picturestr.h"
+ #include "glyphstr.h"
+ 
++#include <stdint.h>
++
+ /*
+  * From Knuth -- a good choice for hash/rehash values is p, p-2 where
+  * p and p-2 are both prime.  These tables are sized to have an extra 10%
+@@ -627,8 +629,12 @@
+     int		     size;
+     GlyphPtr	     glyph;
+     int		     i;
+-
+-    size = gi->height * PixmapBytePad (gi->width, glyphDepths[fdepth]);
++    size_t	     padded_width;
++    
++    padded_width = PixmapBytePad (gi->width, glyphDepths[fdepth]);
++    if (gi->height && padded_width > (UINT32_MAX - sizeof(GlyphRec))/gi->height)
++	return 0;
++    size = gi->height * padded_width;
+     glyph = (GlyphPtr) xalloc (size + sizeof (GlyphRec));
+     if (!glyph)
+ 	return 0;
+--- xorg-server.orig/render/render.c
++++ xorg-server/render/render.c
+@@ -1504,6 +1504,8 @@
+     pScreen = pSrc->pDrawable->pScreen;
+     width = pSrc->pDrawable->width;
+     height = pSrc->pDrawable->height;
++    if (height && width > UINT32_MAX/(height*sizeof(CARD32)))
++	return BadAlloc;
+     if ( stuff->x > width 
+       || stuff->y > height )
+ 	return (BadMatch);
+@@ -1917,6 +1919,8 @@
+     LEGAL_NEW_RESOURCE(stuff->pid, client);
+ 
+     len = (client->req_len << 2) - sizeof(xRenderCreateLinearGradientReq);
++    if (stuff->nStops > UINT32_MAX/(sizeof(xFixed) + sizeof(xRenderColor)))
++	return BadLength;
+     if (len != stuff->nStops*(sizeof(xFixed) + sizeof(xRenderColor)))
+         return BadLength;
+ 
+@@ -2488,18 +2492,18 @@
+     return (*ProcRenderVector[stuff->renderReqType]) (client);
+ }
+ 
+-static void swapStops(void *stuff, int n)
++static void swapStops(void *stuff, int num)
+ {
+-    int i;
++    int i, n;
+     CARD32 *stops;
+     CARD16 *colors;
+     stops = (CARD32 *)(stuff);
+-    for (i = 0; i < n; ++i) {
++    for (i = 0; i < num; ++i) {
+         swapl(stops, n);
+         ++stops;
+     }
+     colors = (CARD16 *)(stops);
+-    for (i = 0; i < 4*n; ++i) {
++    for (i = 0; i < 4*num; ++i) {
+         swaps(stops, n);
+         ++stops;
+     }
+@@ -2522,6 +2526,8 @@
+     swapl(&stuff->nStops, n);
+ 
+     len = (client->req_len << 2) - sizeof(xRenderCreateLinearGradientReq);
++    if (stuff->nStops > UINT32_MAX/(sizeof(xFixed) + sizeof(xRenderColor)))
++	return BadLength;
+     if (len != stuff->nStops*(sizeof(xFixed) + sizeof(xRenderColor)))
+         return BadLength;
+ 
+@@ -2549,6 +2555,8 @@
+     swapl(&stuff->nStops, n);
+ 
+     len = (client->req_len << 2) - sizeof(xRenderCreateRadialGradientReq);
++    if (stuff->nStops > UINT32_MAX/(sizeof(xFixed) + sizeof(xRenderColor)))
++	return BadLength;
+     if (len != stuff->nStops*(sizeof(xFixed) + sizeof(xRenderColor)))
+         return BadLength;
+ 
+@@ -2573,6 +2581,8 @@
+     swapl(&stuff->nStops, n);
+ 
+     len = (client->req_len << 2) - sizeof(xRenderCreateConicalGradientReq);
++    if (stuff->nStops > UINT32_MAX/(sizeof(xFixed) + sizeof(xRenderColor)))
++	return BadLength;
+     if (len != stuff->nStops*(sizeof(xFixed) + sizeof(xRenderColor)))
+         return BadLength;
+ 

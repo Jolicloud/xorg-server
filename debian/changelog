@@ -1,3 +1,14 @@
+xorg-server (2:1.1.1-21etch5) UNRELEASED; urgency=high
+
+  * Security update, fixes several vulnerabilities.  References:
+    CVE-2008-2360 - RENDER Extension heap buffer overflow
+    CVE-2008-2361 - RENDER Extension crash
+    CVE-2008-2362 - RENDER Extension memory corruption
+    CVE-2008-1379 - MIT-SHM arbitrary memory read
+    CVE-2008-1377 - RECORD and Security extensions memory corruption
+
+ -- Julien Cristau <jcristau@debian.org>  Wed, 07 May 2008 14:46:10 +0200
+
 xorg-server (2:1.1.1-21etch4) stable; urgency=low
 
   [ Julien Cristau ]
