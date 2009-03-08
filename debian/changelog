@@ -1,3 +1,10 @@
+xorg-server (2:1.4.2-10.lenny1) stable; urgency=low
+
+  * Work around a bug in the sparc PCI code by falling back to the fbdev
+    driver (closes: #488669).
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 08 Mar 2009 22:25:46 +0100
+
 xorg-server (2:1.4.2-10) unstable; urgency=medium
 
   * Cherry-pick from upstream: GLcore: make googleearth not crash the server

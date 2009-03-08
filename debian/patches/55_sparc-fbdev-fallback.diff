@@ -1,0 +1,128 @@
+From db183d95a4b03a735da54609b6158e17b0422e62 Mon Sep 17 00:00:00 2001
+From: Julien Cristau <jcristau@debian.org>
+Date: Tue, 24 Feb 2009 01:25:32 +0100
+Subject: [PATCH] Add an fbdev screen as a fallback on sparc
+
+Because of a bug in our PCI code that got exposed by recent kernels,
+we will fail to start with PCI drivers on sparc.  Add a new fallback
+screen using the fbdev driver that should hopefully still work.
+
+For this to work we need xf86MapDomainMemory to not throw a fatal error
+on failure, otherwise we won't even try the fallback.
+---
+ hw/xfree86/common/xf86Config.c       |   65 ++++++++++++++++++++++++++++++++++
+ hw/xfree86/os-support/bus/linuxPci.c |    4 +-
+ 2 files changed, 67 insertions(+), 2 deletions(-)
+
+Index: xorg-server/hw/xfree86/common/xf86Config.c
+===================================================================
+--- xorg-server.orig/hw/xfree86/common/xf86Config.c
++++ xorg-server/hw/xfree86/common/xf86Config.c
+@@ -1530,6 +1530,51 @@
+        {0}, FALSE },
+ };
+ 
++#ifdef __sparc__
++/*
++ * XXX this is a kludge to workaround a bug on sparc that makes X fail to
++ * start on pci platforms, and where we want to always fallback to fbdev.
++ */
++static void configAddFbdev(XF86ConfLayoutPtr conf_layout)
++{
++    XF86ConfScreenPtr fbdev_screen = xnfcalloc(1, sizeof(XF86ConfScreenRec));
++    XF86ConfDevicePtr fbdev_device = xnfcalloc(1, sizeof(XF86ConfDeviceRec));
++    XF86ConfAdjacencyPtr fbdev_adjp = xnfcalloc(1, sizeof(XF86ConfAdjacencyRec));
++
++    fbdev_adjp->adj_scrnum = -1;
++    fbdev_adjp->adj_screen = fbdev_screen;
++    fbdev_adjp->adj_screen_str = xstrdup("fbdev fallback Screen");
++    fbdev_adjp->adj_where = CONF_ADJ_OBSOLETE;
++
++    fbdev_screen->scrn_identifier = xstrdup(fbdev_adjp->adj_screen_str);
++    fbdev_screen->scrn_device_str = xstrdup("fbdev fallback Device");
++    fbdev_screen->scrn_device = fbdev_device;
++
++    fbdev_device->dev_identifier = xstrdup(fbdev_screen->scrn_device_str);
++    fbdev_device->dev_driver = xstrdup("fbdev");
++
++    conf_layout->lay_adjacency_lst =
++	xf86addListItem(&conf_layout->lay_adjacency_lst->list,
++                        &fbdev_adjp->list);
++}
++
++static XF86ConfScreenPtr configAddFbdevScreen(void)
++{
++    XF86ConfScreenPtr fbdev_screen = xnfcalloc(1, sizeof(XF86ConfScreenRec));
++    XF86ConfDevicePtr fbdev_device = xnfcalloc(1, sizeof(XF86ConfDeviceRec));
++
++    fbdev_screen->scrn_identifier = xstrdup("fbdev fallback Screen");
++    fbdev_screen->scrn_device_str = xstrdup("fbdev fallback Device");
++    fbdev_screen->scrn_device = fbdev_device;
++
++    fbdev_device->dev_identifier = xstrdup(fbdev_screen->scrn_device_str);
++    fbdev_device->dev_driver = xstrdup("fbdev");
++
++    return fbdev_screen;
++
++}
++#endif
++
+ /*
+  * figure out which layout is active, which screens are used in that layout,
+  * which drivers and monitors are used in these screens
+@@ -1576,6 +1621,9 @@
+     }
+     xf86Msg(from, "ServerLayout \"%s\"\n", conf_layout->lay_identifier);
+     adjp = conf_layout->lay_adjacency_lst;
++#ifdef __sparc__
++    configAddFbdev(conf_layout);
++#endif
+ 
+     /*
+      * we know that each screen is referenced exactly once on the left side
+@@ -1820,13 +1868,30 @@
+ 
+     /* We have exactly one screen */
+ 
++#ifndef __sparc__
+     slp = xnfcalloc(1, 2 * sizeof(screenLayoutRec));
++#else
++    slp = xnfcalloc(3, sizeof(screenLayoutRec));
++#endif
++
+     slp[0].screen = xnfcalloc(1, sizeof(confScreenRec));
++#ifndef __sparc__
+     slp[1].screen = NULL;
++#else
++    slp[1].screen = xnfcalloc(1, sizeof(confScreenRec));
++    slp[2].screen = NULL;
++#endif
+     if (!configScreen(slp[0].screen, conf_screen, 0, from)) {
+ 	xfree(slp);
+ 	return FALSE;
+     }
++#ifdef __sparc__
++    conf_screen = configAddFbdevScreen();
++    if (!configScreen(slp[1].screen, conf_screen, 1, X_DEFAULT)) {
++	xfree(slp);
++	return FALSE;
++    }
++#endif
+     servlayoutp->id = "(implicit)";
+     servlayoutp->screens = slp;
+     servlayoutp->inactives = xnfcalloc(1, sizeof(GDevRec));
+Index: xorg-server/hw/xfree86/os-support/bus/linuxPci.c
+===================================================================
+--- xorg-server.orig/hw/xfree86/os-support/bus/linuxPci.c
++++ xorg-server/hw/xfree86/os-support/bus/linuxPci.c
+@@ -703,8 +703,8 @@
+     if (fd >= 0)
+ 	close(fd);
+     if (addr == NULL || addr == MAP_FAILED) {
+-	perror("mmap failure");
+-	FatalError("xf86MapDomainMem():  mmap() failure\n");
++	ErrorF("xf86MapDomainMem():  %s\n", strerror(errno));
++	addr = NULL;
+     }
+     return addr;
+ }
