@@ -3,6 +3,8 @@ xorg-server (2:1.4.2-10.lenny2) UNRELEASED; urgency=low
   * Revert change from -10.lenny1.  If both PCI and fb drivers are loaded, the
     server falls over, so the workaround doesn't work, and seems to break
     other setups...  This closes: #527058, and reopens #488669.
+  * Cherry-pick patch from upstream to fix wakeup storm in the idletime xsync
+    counter.
 
  -- Julien Cristau <jcristau@debian.org>  Fri, 22 May 2009 15:15:16 +0200
 
