@@ -1,3 +1,10 @@
+xorg-server (2:1.6.5-1) UNRELEASED; urgency=low
+
+  * New upstream bugfix release.
+  * Drop fix-dga-removal.patch, applied upstream.
+
+ -- Julien Cristau <jcristau@debian.org>  Mon, 12 Oct 2009 16:10:03 +0200
+
 xorg-server (2:1.6.4-2) unstable; urgency=low
 
   * Add fix-dga-removal.patch, closes: #548724.

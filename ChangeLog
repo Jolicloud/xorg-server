@@ -1,3 +1,66 @@
+commit 439c58849304907900e4dc7429aedb0192749c02
+Author: Keith Packard <keithp@keithp.com>
+Date:   Sun Oct 11 22:03:32 2009 -0700
+
+    Bump version to 1.6.5
+    
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+
+commit 7f2f71da5125ae01a8279a4886090a711100d671
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Mon Sep 28 14:18:45 2009 +1000
+
+    ephyr: if -parent is given, check for a trailing -screen. (#24144)
+    
+    If -parent is given, don't open up a new window if -screen is given as well.
+    The commandline option -screen allows to set the depth of the embedded
+    Xephry instance, even though width and height are autoscaled on -parent.
+    
+    This patch checks for a -screen parameter after -parent and - if one is
+    found - delays initializing the screen. The parent window id is stored
+    temporarily but re-set after a -screen argument.
+    The following command is thus valid:
+    
+    Xephyr -parent 1234 -screen 640x480@8 -screen 1024x768
+    
+    It embeds the first 8-bit screen into window 1234 and opens up a new window
+    for the second screen. Multiple parent arguments are possible, the screens
+    are embedded in-order.
+    
+    X.Org Bug 24144 <http://bugs.freedesktop.org/show_bug.cgi?id=24144>
+    
+    Tested-by: Vic Lee
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    (cherry picked from commit 19be992d9dc542b61fa3f4fd32a09071c9e64880)
+    
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+
+commit c07b2368a7dedb66455eea313c06859afa2e1a9c
+Author: Keith Packard <keithp@keithp.com>
+Date:   Thu Oct 1 15:24:58 2009 -0700
+
+    Bump to version 1.6.4.901
+    
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+
+commit fc31f76b6ff735e4a4006c5454c4d496ee8b154a
+Author: Keith Packard <keithp@keithp.com>
+Date:   Wed Sep 30 11:40:19 2009 -0700
+
+    Re-fix DGA removal.
+    
+    Removing DGA ended up breaking any drivers calling into the old
+    xf86DiDGAInit function as it tried to see if DGA was already enabled
+    and ended up crashing if the VT wasn't completely initialized. Oops.
+    
+    Also, if the driver initializes DGA itself, have the DiDGA
+    initialization overwrite that information as the DiDGA code will call
+    ReInit on mode detect.
+    
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    (cherry picked from commit db98b26ee145f70e732e2cf4a6ac3de77fdf4adc)
+
 commit 8cf659f3a5914369a2137ac17b689e5a9fe9ca27
 Author: Keith Packard <keithp@keithp.com>
 Date:   Sun Sep 27 19:21:45 2009 -0700
