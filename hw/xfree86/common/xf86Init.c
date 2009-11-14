@@ -986,8 +986,10 @@ OsVendorInit()
   loadableFonts = TRUE;
 #endif
 
-  if (!beenHere)
+  if (!beenHere) {
+    umask(022);
     xf86LogInit();
+  }
 
 #if SET_STDERR_NONBLOCKING
         /* Set stderr to non-blocking. */
