@@ -1,3 +1,11 @@
+xorg-server (2:1.4.2-10.lenny3) UNRELEASED; urgency=low
+
+  * Cherry-pick patch from upstream to set umask to a sane value in Xorg
+    before opening the log, so we don't create it world-writable (closes:
+    #555308).
+
+ -- Julien Cristau <jcristau@debian.org>  Sat, 21 Nov 2009 13:09:36 +0100
+
 xorg-server (2:1.4.2-10.lenny2) stable; urgency=low
 
   * Revert change from -10.lenny1.  If both PCI and fb drivers are loaded, the
