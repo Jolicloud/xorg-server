@@ -1,0 +1,44 @@
+From 8f536b80f153337f74f01be1a48f5067cefc47bc Mon Sep 17 00:00:00 2001
+From: Julien Cristau <jcristau@debian.org>
+Date: Mon, 29 Mar 2010 23:32:19 +0200
+Subject: [PATCH] Fix mod() macro in fb and mi
+
+Patch by Olivier Fourdan (Red Hat) via Ubuntu.
+
+References:
+https://bugs.launchpad.net/ubuntu/+source/xorg-server/+bug/551193
+https://bugzilla.redhat.com/show_bug.cgi?id=570089
+---
+ fb/fbpict.c |    2 +-
+ mi/miarc.c  |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fb/fbpict.c b/fb/fbpict.c
+index 85b5171..ff29ff2 100644
+--- a/fb/fbpict.c
++++ b/fb/fbpict.c
+@@ -37,7 +37,7 @@
+ #include "mipict.h"
+ #include "fbpict.h"
+ 
+-#define mod(a,b) ((b) == 1 ? 0 : (a) >= 0 ? (a) % (b) : (b) - (-a) % (b))
++#define mod(a,b) ((b) == 1 ? 0 : (a) >= 0 ? (a) % (b) : (b) - (-(a)) % (b))
+ 
+ void
+ fbWalkCompositeRegion (CARD8 op,
+diff --git a/mi/miarc.c b/mi/miarc.c
+index 3b77ce7..34f4bb8 100644
+--- a/mi/miarc.c
++++ b/mi/miarc.c
+@@ -1528,7 +1528,7 @@ miRoundCap(
+ 
+ # define Dsin(d)	((d) == 0.0 ? 0.0 : ((d) == 90.0 ? 1.0 : sin(d*M_PI/180.0)))
+ # define Dcos(d)	((d) == 0.0 ? 1.0 : ((d) == 90.0 ? 0.0 : cos(d*M_PI/180.0)))
+-# define mod(a,b)	((a) >= 0 ? (a) % (b) : (b) - (-a) % (b))
++# define mod(a,b)	((a) >= 0 ? (a) % (b) : (b) - (-(a)) % (b))
+ 
+ static double
+ miDcos (double a)
+-- 
+1.7.0.3
+

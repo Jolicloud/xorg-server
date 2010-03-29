@@ -3,6 +3,8 @@ xorg-server (2:1.4.2-10.lenny3) UNRELEASED; urgency=low
   * Cherry-pick patch from upstream to set umask to a sane value in Xorg
     before opening the log, so we don't create it world-writable (closes:
     #555308).
+  * Add patch by Olivier Fourdan (Red Hat) to fix the mod() macro in fb and
+    mi.
 
  -- Julien Cristau <jcristau@debian.org>  Sat, 21 Nov 2009 13:09:36 +0100
 
