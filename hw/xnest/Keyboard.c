@@ -1,5 +1,5 @@
 /* $Xorg: Keyboard.c,v 1.3 2000/08/17 19:53:28 cpqbld Exp $ */
-/* $XdotOrg: xc/programs/Xserver/hw/xnest/Keyboard.c,v 1.4 2005/06/25 21:28:48 ajax Exp $ */
+/* $XdotOrg: xserver/xorg/hw/xnest/Keyboard.c,v 1.8 2005/07/14 03:36:44 kem Exp $ */
 /*
 
 Copyright 1993 by Davor Matic

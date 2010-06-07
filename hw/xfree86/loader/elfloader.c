@@ -1,4 +1,4 @@
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/loader/elfloader.c,v 1.7 2005/04/23 19:01:13 ajax Exp $ */
+/* $XdotOrg: xserver/xorg/hw/xfree86/loader/elfloader.c,v 1.10 2005/07/03 08:53:46 daniels Exp $ */
 /* $XFree86: xc/programs/Xserver/hw/xfree86/loader/elfloader.c,v 1.61tsi Exp $ */
 
 /*

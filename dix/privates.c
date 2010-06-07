@@ -1,5 +1,5 @@
 /* $Xorg: privates.c,v 1.4 2001/02/09 02:04:40 xorgcvs Exp $ */
-/* $XdotOrg: xc/programs/Xserver/dix/privates.c,v 1.6 2005/05/22 01:12:49 alanc Exp $ */
+/* $XdotOrg: xserver/xorg/dix/privates.c,v 1.10 2005/09/05 07:40:50 daniels Exp $ */
 /*
 
 Copyright 1993, 1998  The Open Group

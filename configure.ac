@@ -1,4 +1,4 @@
-dnl $Id$
+dnl $Id: configure.ac,v 1.147 2005/12/15 00:20:27 kem Exp $
 dnl
 dnl Copyright © 2003-2005 Keith Packard, Daniel Stone
 dnl

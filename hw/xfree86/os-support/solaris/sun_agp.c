@@ -1,4 +1,4 @@
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/os-support/sunos/sun_agp.c,v 1.1 2005/06/09 03:11:58 alanc Exp $ */
+/* $XdotOrg: xserver/xorg/hw/xfree86/os-support/solaris/sun_agp.c,v 1.5 2005/08/24 22:37:15 alanc Exp $ */
 /*
  * Abstraction of the AGP GART interface.
  *

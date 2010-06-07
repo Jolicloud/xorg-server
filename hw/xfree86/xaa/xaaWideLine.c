@@ -1,5 +1,5 @@
 /* $XFree86: xc/programs/Xserver/hw/xfree86/xaa/xaaWideLine.c,v 1.10 2001/11/16 16:47:56 dawes Exp $ */
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/xaa/xaaWideLine.c,v 1.4 2005/04/20 12:25:40 daniels Exp $ */
+/* $XdotOrg: xserver/xorg/hw/xfree86/xaa/xaaWideLine.c,v 1.7 2005/07/03 08:53:49 daniels Exp $ */
 /*
 
 XAAPolylinesWideSolid does not maintain a span list and subsequently does

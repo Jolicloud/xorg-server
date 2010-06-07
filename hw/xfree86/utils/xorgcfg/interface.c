@@ -1,4 +1,4 @@
-/* $XdotOrg: $ */
+/* $XdotOrg: xserver/xorg/hw/xfree86/utils/xorgcfg/interface.c,v 1.8 2005/11/08 06:33:30 jkj Exp $ */
 /*
  * Copyright (c) 2000 by Conectiva S.A. (http://www.conectiva.com)
  * 

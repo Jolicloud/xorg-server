@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: fbedge.c,v 1.3 2005/07/03 07:01:21 daniels Exp $
  *
  * Copyright © 2004 Keith Packard
  *

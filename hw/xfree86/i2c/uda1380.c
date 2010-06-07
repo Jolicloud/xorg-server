@@ -1,5 +1,5 @@
 /*************************************************************************************
- * $Id$
+ * $Id: uda1380.c,v 1.4 2005/07/13 20:19:37 sandmann Exp $
  * 
  * Copyright (C) 2005 Bogdan D. bogdand@users.sourceforge.net
  *
@@ -22,10 +22,7 @@
  * otherwise to promote the sale, use or other dealings in this Software without prior written 
  * authorization from the author.
  *
- * $Log$
- * Revision 1.5  2005/09/24 21:56:00  bogdand
- * Changed the license to a X/MIT one
- *
+ * $Log: uda1380.c,v $
  * Revision 1.4  2005/07/13 20:19:37  sandmann
  * xc/programs/Xserver/hw/xfree86/drivers/i2c/*.c: include xorg-config.h
  * instead of config.h

@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: cursor.c,v 1.5 2005/07/03 07:02:08 daniels Exp $
  *
  * Copyright © 2002 Keith Packard
  *

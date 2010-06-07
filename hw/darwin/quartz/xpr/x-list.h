@@ -1,5 +1,5 @@
 /* x-list.h -- simple list type
-   $Id$
+   $Id: x-list.h,v 1.10 2003/07/18 00:52:19 jharper Exp $
 
    Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
 

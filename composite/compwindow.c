@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: compwindow.c,v 1.10 2005/07/03 07:01:17 daniels Exp $
  *
  * Copyright © 2003 Keith Packard
  *

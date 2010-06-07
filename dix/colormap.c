@@ -1,4 +1,4 @@
-/* $XdotOrg: xc/programs/Xserver/dix/colormap.c,v 1.7 2005/04/20 12:25:19 daniels Exp $ */
+/* $XdotOrg: xserver/xorg/dix/colormap.c,v 1.11 2005/09/05 07:40:50 daniels Exp $ */
 /* $XFree86: xc/programs/Xserver/dix/colormap.c,v 3.11 2003/11/03 05:10:59 tsi Exp $ */
 /***********************************************************
 

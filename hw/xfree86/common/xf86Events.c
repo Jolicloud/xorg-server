@@ -49,7 +49,7 @@
  */
 
 /* $XConsortium: xf86Events.c /main/46 1996/10/25 11:36:30 kaleb $ */
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/common/xf86Events.c,v 1.9 2005/04/21 00:31:31 daniels Exp $ */
+/* $XdotOrg: xserver/xorg/hw/xfree86/common/xf86Events.c,v 1.21 2005/11/08 06:33:28 jkj Exp $ */
 
 /* [JCH-96/01/21] Extended std reverse map to four buttons. */
 

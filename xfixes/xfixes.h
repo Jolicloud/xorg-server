@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: xfixes.h,v 1.5 2005/07/01 22:43:42 daniels Exp $
  *
  * Copyright © 2002 Keith Packard
  *

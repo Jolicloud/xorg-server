@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: filter.c,v 1.9 2005/07/03 07:37:35 daniels Exp $
  *
  * Copyright © 2002 Keith Packard
  *

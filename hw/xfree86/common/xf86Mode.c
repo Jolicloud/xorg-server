@@ -1,4 +1,4 @@
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/common/xf86Mode.c,v 1.4 2005/05/18 10:31:53 eich Exp $ */
+/* $XdotOrg: xserver/xorg/hw/xfree86/common/xf86Mode.c,v 1.7 2005/07/03 08:53:42 daniels Exp $ */
 /* $XFree86: xc/programs/Xserver/hw/xfree86/common/xf86Mode.c,v 1.69 2003/10/08 14:58:28 dawes Exp $ */
 /*
  * Copyright (c) 1997-2003 by The XFree86 Project, Inc.

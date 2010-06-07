@@ -94,7 +94,7 @@
  *  Chisato Yamauchi(cyamauch@phyas.aichi-edu.ac.jp)
  */
 /* $XConsortium: xf86config.c /main/21 1996/10/28 05:43:57 kaleb $ */
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/xf86config/xorgconfig.c,v 1.14 2005/05/28 00:08:03 alanc Exp $ */
+/* $XdotOrg: xserver/xorg/hw/xfree86/utils/xorgconfig/xorgconfig.c,v 1.19 2005/11/08 06:33:30 jkj Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "xorg-server.h"

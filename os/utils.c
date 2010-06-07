@@ -1,4 +1,4 @@
-/* $XdotOrg: xc/programs/Xserver/os/utils.c,v 1.17 2005/06/09 02:29:42 ajax Exp $ */
+/* $XdotOrg: xserver/xorg/os/utils.c,v 1.21 2005/11/08 06:33:30 jkj Exp $ */
 /* $Xorg: utils.c,v 1.5 2001/02/09 02:05:24 xorgcvs Exp $ */
 /*
 

@@ -2,7 +2,7 @@
    Copyright (c) 2002  XFree86 Inc
 */
 /* $XFree86: xc/programs/Xserver/Xext/xres.c,v 1.7tsi Exp $ */
-/* $XdotOrg: xc/programs/Xserver/Xext/xres.c,v 1.4 2005/04/20 12:25:12 daniels Exp $ */
+/* $XdotOrg: xserver/xorg/Xext/xres.c,v 1.7 2005/07/03 08:53:36 daniels Exp $ */
 
 #define NEED_EVENTS
 #define NEED_REPLIES
