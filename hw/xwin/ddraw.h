@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: ddraw.h,v 1.5 2005/07/01 22:43:39 daniels Exp $ */
 
 #ifndef __XWIN_DDRAW_H
 #define __XWIN_DDRAW_H

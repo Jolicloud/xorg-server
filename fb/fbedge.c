@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: fbedge.c,v 1.5 2005/10/03 10:20:29 anholt Exp $
  *
  * Copyright © 2004 Keith Packard
  *
