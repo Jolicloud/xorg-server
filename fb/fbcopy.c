@@ -96,6 +96,8 @@ fbCopyNtoN (DrawablePtr	pSrcDrawable,
 #endif
 	pbox++;
     }    
+    fbFinishAccess (pDstDrawable);
+    fbFinishAccess (pSrcDrawable);
 }
 
 void
@@ -166,6 +168,9 @@ fbCopy1toN (DrawablePtr	pSrcDrawable,
 	}
 	pbox++;
     }
+
+    fbFinishAccess (pDstDrawable);
+    fbFinishAccess (pSrcDrawable);
 }
 
 void
@@ -214,6 +219,8 @@ fbCopyNto1 (DrawablePtr	pSrcDrawable,
 			(FbStip) pPriv->and, (FbStip) pPriv->xor,
 			(FbStip) pPriv->bgand, (FbStip) pPriv->bgxor,
 			bitplane);
+	    fbFinishAccess (pDstDrawable);
+	    fbFinishAccess (pSrcDrawable);
 	}
 	else
 	{
@@ -274,6 +281,9 @@ fbCopyNto1 (DrawablePtr	pSrcDrawable,
 		      pPriv->and, pPriv->xor,
 		      pPriv->bgand, pPriv->bgxor);
 	    xfree (tmp);
+
+	    fbFinishAccess (pDstDrawable);
+	    fbFinishAccess (pSrcDrawable);
 	}
 	pbox++;
     }

@@ -153,7 +153,7 @@ fbEvenStipple (FbBits	*dst,
 	/*
 	 * Extract stipple bits for this scanline;
 	 */
-	bits = *s;
+	bits = READ(s);
 	s += stipStride;
 	if (s == stipEnd)
 	    s = stip;
@@ -197,12 +197,12 @@ fbEvenStipple (FbBits	*dst,
 	    n = nmiddle;
 	    if (!and)
 		while (n--)
-		    *dst++ = xor;
+		    WRITE(dst++, xor);
 	    else
 	    {
 		while (n--)
 		{
-		    *dst = FbDoRRop (*dst, and, xor);
+		    WRITE(dst, FbDoRRop (READ(dst), and, xor));
 		    dst++;
 		}
 	    }

@@ -24,6 +24,7 @@ install-sh
 libtool
 ltmain.sh
 missing
+tags
 ylwrap
 xorg-server.pc
 stamp-h?

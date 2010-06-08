@@ -45,7 +45,8 @@ libati_a_SOURCES = 	\
 	ati_reg.h	\
 	r128_composite.c \
 	ati_video.c	\
-	radeon_composite.c
+	radeon_composite.c \
+	$(DRI_SOURCES)
 
 Xati_SOURCES = \
 	ati_stub.c
