@@ -1,0 +1,1 @@
+xorgos.lo .libs/xorgos.o: xorgos.c

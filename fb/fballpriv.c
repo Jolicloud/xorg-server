@@ -84,8 +84,3 @@ fbAllocatePrivates(ScreenPtr pScreen, int *pGCIndex)
 #endif
     return TRUE;
 }
-
-#ifdef FB_ACCESS_WRAPPER
-ReadMemoryProcPtr wfbReadMemory;
-WriteMemoryProcPtr wfbWriteMemory;
-#endif

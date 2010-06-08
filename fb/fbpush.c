@@ -56,7 +56,7 @@ fbPushPattern (DrawablePtr  pDrawable,
 	w = width;
 	s = src;
 	src += srcStride;
-	bits = READ(s++);
+	bits = *s++;
 	xspan = x;
 	while (w)
 	{
@@ -71,7 +71,7 @@ fbPushPattern (DrawablePtr  pDrawable,
 		    bitsMask = FbStipRight (bitsMask, 1);
 		    if (!bitsMask)
 		    {
-			bits = READ(s++);
+			bits = *s++;
 			bitsMask = FbBitsMask(0,1);
 		    }
 		} while (bits & bitsMask);
@@ -90,7 +90,7 @@ fbPushPattern (DrawablePtr  pDrawable,
 		    bitsMask = FbStipRight (bitsMask, 1);
 		    if (!bitsMask)
 		    {
-			bits = READ(s++);
+			bits = *s++;
 			bitsMask = FbBitsMask(0,1);
 		    }
 		} while (!(bits & bitsMask));
@@ -163,7 +163,6 @@ fbPushFill (DrawablePtr	pDrawable,
 		      fbAnd(GXnoop,(FbBits) 0,FB_ALLONES),
 		      fbXor(GXnoop,(FbBits) 0,FB_ALLONES));
 	}
-	fbFinishAccess (pDrawable);
     }
     else
     {

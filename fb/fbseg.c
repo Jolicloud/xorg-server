@@ -77,7 +77,7 @@ fbBresSolid (DrawablePtr    pDrawable,
 	    mask = fbBresShiftMask(mask,signdx,dstBpp);
 	    if (!mask)
 	    {
-		WRITE(dst, FbDoMaskRRop (READ(dst), and, xor, bits));
+		*dst = FbDoMaskRRop (*dst, and, xor, bits);
 		bits = 0;
 		dst += signdx;
 		mask = mask0;
@@ -85,20 +85,20 @@ fbBresSolid (DrawablePtr    pDrawable,
 	    e += e1;
 	    if (e >= 0)
 	    {
-		WRITE(dst, FbDoMaskRRop (READ(dst), and, xor, bits));
+		*dst = FbDoMaskRRop (*dst, and, xor, bits);
 		bits = 0;
 		dst += dstStride;
 		e += e3;
 	    }
 	}
 	if (bits)
-	    WRITE(dst, FbDoMaskRRop (READ(dst), and, xor, bits));
+	    *dst = FbDoMaskRRop (*dst, and, xor, bits);
     }
     else
     {
 	while (len--)
 	{
-	    WRITE(dst, FbDoMaskRRop (READ(dst), and, xor, mask));
+	    *dst = FbDoMaskRRop (*dst, and, xor, mask);
 	    dst += dstStride;
 	    e += e1;
 	    if (e >= 0)
@@ -113,8 +113,6 @@ fbBresSolid (DrawablePtr    pDrawable,
 	    }
 	}
     }
-
-    fbFinishAccess (pDrawable);
 }
 
 void
@@ -164,9 +162,9 @@ fbBresDash (DrawablePtr	pDrawable,
     while (len--)
     {
 	if (even)
-	    WRITE(dst, FbDoMaskRRop (READ(dst), and, xor, mask));
+	    *dst = FbDoMaskRRop (*dst, and, xor, mask);
 	else if (doOdd)
-	    WRITE(dst, FbDoMaskRRop (READ(dst), bgand, bgxor, mask));
+	    *dst = FbDoMaskRRop (*dst, bgand, bgxor, mask);
 	if (axis == X_AXIS)
 	{
 	    mask = fbBresShiftMask(mask,signdx,dstBpp);
@@ -199,8 +197,6 @@ fbBresDash (DrawablePtr	pDrawable,
 	}
 	FbDashStep (dashlen, even);
     }
-
-    fbFinishAccess (pDrawable);
 }
 
 void
@@ -373,13 +369,13 @@ fbBresSolid24RRop (DrawablePtr  pDrawable,
 	FbMaskStip (x, 24, leftMask, nl, rightMask);
 	if (leftMask)
 	{
-	    WRITE(d, FbDoMaskRRop (READ(d), andT, xorT, leftMask));
+	    *d = FbDoMaskRRop (*d, andT, xorT, leftMask);
 	    d++;
 	    andT = FbNext24Stip (andT);
 	    xorT = FbNext24Stip (xorT);
 	}
 	if (rightMask)
-	    WRITE(d, FbDoMaskRRop (READ(d), andT, xorT, rightMask));
+	    *d = FbDoMaskRRop (*d, andT, xorT, rightMask);
 	if (axis == X_AXIS)
 	{
 	    x1 += signdx;
@@ -401,8 +397,6 @@ fbBresSolid24RRop (DrawablePtr  pDrawable,
 	    }
 	}
     }
-
-    fbFinishAccess (pDrawable);
 }
 
 static void
@@ -472,13 +466,13 @@ fbBresDash24RRop (DrawablePtr	pDrawable,
 	    FbMaskStip (x, 24, leftMask, nl, rightMask);
 	    if (leftMask)
 	    {
-		WRITE(d, FbDoMaskRRop (READ(d), andT, xorT, leftMask));
+		*d = FbDoMaskRRop (*d, andT, xorT, leftMask);
 		d++;
 		andT = FbNext24Stip (andT);
 		xorT = FbNext24Stip (xorT);
 	    }
 	    if (rightMask)
-		WRITE(d, FbDoMaskRRop (READ(d), andT, xorT, rightMask));
+		*d = FbDoMaskRRop (*d, andT, xorT, rightMask);
 	}
 	if (axis == X_AXIS)
 	{
@@ -502,8 +496,6 @@ fbBresDash24RRop (DrawablePtr	pDrawable,
 	}
 	FbDashStep (dashlen, even);
     }
-
-    fbFinishAccess (pDrawable);
 }
 #endif
 

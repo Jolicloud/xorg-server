@@ -97,6 +97,5 @@ fbSetSpans (DrawablePtr	    pDrawable,
 	pwidth++;
     }
     fbValidateDrawable (pDrawable);
-    fbFinishAccess (pDrawable);
 }
 	    

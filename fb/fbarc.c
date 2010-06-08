@@ -107,7 +107,6 @@ fbPolyArc (DrawablePtr	pDrawable,
 		    miPolyArc(pDrawable, pGC, 1, parcs);
 		parcs++;
 	    }
-	    fbFinishAccess (pDrawable);
 	}
 	else
 #endif

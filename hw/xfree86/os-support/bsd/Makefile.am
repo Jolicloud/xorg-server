@@ -67,7 +67,6 @@ libbsd_la_SOURCES = \
 	$(AGP_SOURCES) \
 	$(APM_SOURCES) \
 	$(AXP_SOURCES) \
-	$(DRI_SOURCES) \
 	$(KMOD_SOURCES) \
 	$(RES_SOURCES)
 

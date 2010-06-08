@@ -1,0 +1,1 @@
+osandcommon.lo .libs/osandcommon.o: osandcommon.c

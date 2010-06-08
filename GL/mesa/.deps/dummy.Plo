@@ -1,0 +1,1 @@
+dummy.lo .libs/dummy.o: dummy.c

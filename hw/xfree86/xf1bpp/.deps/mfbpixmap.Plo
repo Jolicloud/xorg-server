@@ -1,0 +1,268 @@
+mfbpixmap.lo .libs/mfbpixmap.o: mfbpixmap.c mfbmap.h \
+  ../../../mfb/mfbpixmap.c ../../../include/dix-config.h \
+  /usr/include/string.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-32.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/stddef.h \
+  /usr/include/xlocale.h /usr/include/bits/string.h \
+  /usr/include/bits/string2.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/bits/types.h \
+  /usr/include/bits/typesizes.h /usr/include/stdlib.h \
+  /usr/include/X11/Xmd.h ../../../include/scrnintstr.h \
+  ../../../include/screenint.h ../../../include/misc.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/X.h /usr/include/X11/Xdefs.h ../../../include/os.h \
+  /usr/include/X11/Xalloca.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/stdarg.h /usr/include/stdio.h \
+  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+  /usr/include/bits/wchar.h /usr/include/gconv.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h /usr/include/X11/Xfuncs.h \
+  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/limits.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+  /usr/include/math.h /usr/include/bits/huge_val.h \
+  /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
+  /usr/include/bits/inf.h /usr/include/bits/nan.h \
+  /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+  /usr/include/bits/mathinline.h /usr/include/assert.h \
+  /usr/include/ctype.h ../../../include/regionstr.h \
+  ../../../include/miscstruct.h /usr/include/X11/Xprotostr.h \
+  ../../../include/gc.h /usr/include/X11/Xproto.h \
+  ../../../include/pixmap.h /usr/include/pixman-1/pixman.h \
+  /usr/include/stdint.h ../../../include/bstore.h \
+  ../../../include/bstorestr.h ../../../include/region.h \
+  ../../../include/window.h ../../../include/colormap.h \
+  ../../../include/cursor.h ../../../include/validate.h \
+  ../../../include/dix.h ../../../include/input.h \
+  ../../../include/pixmapstr.h /usr/include/X11/Xarch.h \
+  ../../../mfb/maskbits.h ../../../include/servermd.h ../../../mfb/mfb.h \
+  ../../../include/pixmap.h ../../../include/region.h \
+  ../../../include/gc.h ../../../include/colormap.h \
+  ../../../include/miscstruct.h ../../../mi/mibstore.h \
+  ../../../include/screenint.h ../../../mi/mi.h ../../../include/region.h \
+  ../../../include/validate.h ../../../include/window.h \
+  ../../../include/gc.h /usr/include/X11/fonts/font.h \
+  /usr/include/X11/fonts/fsmasks.h ../../../include/input.h \
+  ../../../include/cursor.h
+
+mfbmap.h:
+
+../../../mfb/mfbpixmap.c:
+
+../../../include/dix-config.h:
+
+/usr/include/string.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-32.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/stddef.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/X11/Xmd.h:
+
+../../../include/scrnintstr.h:
+
+../../../include/screenint.h:
+
+../../../include/misc.h:
+
+/usr/include/X11/Xosdefs.h:
+
+/usr/include/X11/Xfuncproto.h:
+
+/usr/include/X11/X.h:
+
+/usr/include/X11/Xdefs.h:
+
+../../../include/os.h:
+
+/usr/include/X11/Xalloca.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/stdarg.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/gconv.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/X11/Xfuncs.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/alloca.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/limits.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/bits/posix2_lim.h:
+
+/usr/include/bits/xopen_lim.h:
+
+/usr/include/math.h:
+
+/usr/include/bits/huge_val.h:
+
+/usr/include/bits/huge_valf.h:
+
+/usr/include/bits/huge_vall.h:
+
+/usr/include/bits/inf.h:
+
+/usr/include/bits/nan.h:
+
+/usr/include/bits/mathdef.h:
+
+/usr/include/bits/mathcalls.h:
+
+/usr/include/bits/mathinline.h:
+
+/usr/include/assert.h:
+
+/usr/include/ctype.h:
+
+../../../include/regionstr.h:
+
+../../../include/miscstruct.h:
+
+/usr/include/X11/Xprotostr.h:
+
+../../../include/gc.h:
+
+/usr/include/X11/Xproto.h:
+
+../../../include/pixmap.h:
+
+/usr/include/pixman-1/pixman.h:
+
+/usr/include/stdint.h:
+
+../../../include/bstore.h:
+
+../../../include/bstorestr.h:
+
+../../../include/region.h:
+
+../../../include/window.h:
+
+../../../include/colormap.h:
+
+../../../include/cursor.h:
+
+../../../include/validate.h:
+
+../../../include/dix.h:
+
+../../../include/input.h:
+
+../../../include/pixmapstr.h:
+
+/usr/include/X11/Xarch.h:
+
+../../../mfb/maskbits.h:
+
+../../../include/servermd.h:
+
+../../../mfb/mfb.h:
+
+../../../include/pixmap.h:
+
+../../../include/region.h:
+
+../../../include/gc.h:
+
+../../../include/colormap.h:
+
+../../../include/miscstruct.h:
+
+../../../mi/mibstore.h:
+
+../../../include/screenint.h:
+
+../../../mi/mi.h:
+
+../../../include/region.h:
+
+../../../include/validate.h:
+
+../../../include/window.h:
+
+../../../include/gc.h:
+
+/usr/include/X11/fonts/font.h:
+
+/usr/include/X11/fonts/fsmasks.h:
+
+../../../include/input.h:
+
+../../../include/cursor.h:

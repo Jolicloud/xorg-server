@@ -168,8 +168,6 @@ fbPutZImage (DrawablePtr	pDrawable,
 		   pm,
 		   dstBpp);
     }
-
-    fbFinishAccess (pDrawable);
 }
 	     
 void
@@ -277,8 +275,6 @@ fbPutXYImage (DrawablePtr	pDrawable,
 		      fgand, fgxor, bgand, bgxor);
 	}
     }
-
-    fbFinishAccess (pDrawable);
 }
 
 void
@@ -363,6 +359,4 @@ fbGetImage (DrawablePtr	    pDrawable,
 		    fbXorStip(GXcopy,0,FB_STIP_ALLONES),
 		    planeMask);
     }
-
-    fbFinishAccess (pDrawable);
 }
