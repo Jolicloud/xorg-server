@@ -1,0 +1,1 @@
+/home/david/debian/xorg/git/lib/mesa/src/mesa/swrast/s_triangle.h

@@ -1,0 +1,15 @@
+maskbits.lo .libs/maskbits.o: maskbits.c ../include/dix-config.h \
+  maskbits.h /usr/include/X11/X.h /usr/include/X11/Xmd.h \
+  ../include/servermd.h mergerop.h
+
+../include/dix-config.h:
+
+maskbits.h:
+
+/usr/include/X11/X.h:
+
+/usr/include/X11/Xmd.h:
+
+../include/servermd.h:
+
+mergerop.h:

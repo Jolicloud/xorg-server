@@ -1,0 +1,1 @@
+xaaTables.lo .libs/xaaTables.o: xaaTables.c
