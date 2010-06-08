@@ -1,0 +1,13 @@
+xf86BitOrder.o xf86BitOrder.o: xf86BitOrder.c ../xaa/xaaBitOrder.c \
+  ../../../include/xorg-config.h ../../../include/dix-config.h \
+  ../../../include/xkb-config.h /usr/include/X11/Xmd.h
+
+../xaa/xaaBitOrder.c:
+
+../../../include/xorg-config.h:
+
+../../../include/dix-config.h:
+
+../../../include/xkb-config.h:
+
+/usr/include/X11/Xmd.h:

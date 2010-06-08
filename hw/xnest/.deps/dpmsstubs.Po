@@ -1,0 +1,6 @@
+dpmsstubs.o dpmsstubs.o: ../../Xext/dpmsstubs.c \
+  ../../include/dix-config.h ../../Xext/dpmsproc.h
+
+../../include/dix-config.h:
+
+../../Xext/dpmsproc.h:

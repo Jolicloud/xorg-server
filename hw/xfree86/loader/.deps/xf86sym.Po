@@ -1,0 +1,571 @@
+xf86sym.o xf86sym.o: xf86sym.c ../../../include/xorg-config.h \
+  ../../../include/dix-config.h ../../../include/xkb-config.h \
+  /usr/include/fcntl.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-32.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/types.h /usr/include/bits/types.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/stddef.h \
+  /usr/include/bits/typesizes.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/uio.h \
+  /usr/include/sys/stat.h /usr/include/bits/stat.h /usr/include/setjmp.h \
+  /usr/include/bits/setjmp.h sym.h ../../../include/misc.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xmd.h /usr/include/X11/X.h /usr/include/X11/Xdefs.h \
+  ../../../include/os.h ../../../include/misc.h \
+  /usr/include/X11/Xalloca.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/stdarg.h /usr/include/stdio.h \
+  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+  /usr/include/bits/wchar.h /usr/include/gconv.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h /usr/include/X11/Xfuncs.h \
+  /usr/include/string.h /usr/include/xlocale.h /usr/include/bits/string.h \
+  /usr/include/bits/string2.h /usr/include/stdlib.h \
+  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+  /usr/include/alloca.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/limits.h \
+  /usr/lib/gcc/i486-linux-gnu/4.2.3/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+  /usr/include/math.h /usr/include/bits/huge_val.h \
+  /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
+  /usr/include/bits/inf.h /usr/include/bits/nan.h \
+  /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+  /usr/include/bits/mathinline.h /usr/include/assert.h \
+  /usr/include/ctype.h ../../../mi/mi.h ../../../include/region.h \
+  ../../../include/regionstr.h ../../../include/miscstruct.h \
+  /usr/include/X11/Xprotostr.h ../../../include/gc.h \
+  /usr/include/X11/Xproto.h ../../../include/screenint.h \
+  ../../../include/pixmap.h /usr/include/pixman-1/pixman.h \
+  /usr/include/stdint.h ../../../include/validate.h \
+  ../../../include/window.h ../../../include/region.h \
+  ../../../include/gc.h /usr/include/X11/fonts/font.h \
+  /usr/include/X11/fonts/fsmasks.h ../../../include/input.h \
+  ../../../include/window.h ../../../include/cursor.h \
+  ../../../include/cursor.h ../../../mi/mipointer.h loaderProcs.h \
+  ../../../hw/xfree86/common/xf86Module.h ../../../include/misc.h \
+  ../../../hw/xfree86/common/xf86Version.h \
+  /usr/include/X11/fonts/fontmod.h \
+  ../../../hw/xfree86/os-support/bus/xf86Pci.h /usr/include/X11/Xarch.h \
+  ../../../include/misc.h ../../../hw/xfree86/common/xf86.h \
+  ../../../hw/xfree86/common/xf86str.h ../../../include/input.h \
+  ../../../include/scrnintstr.h ../../../include/bstore.h \
+  ../../../include/bstorestr.h ../../../include/colormap.h \
+  ../../../include/cursor.h ../../../include/validate.h \
+  ../../../include/dix.h ../../../include/input.h \
+  ../../../include/pixmapstr.h ../../../include/colormapst.h \
+  ../../../hw/xfree86/common/xf86Module.h \
+  ../../../hw/xfree86/common/xf86Opt.h \
+  ../../../hw/xfree86/os-support/bus/xf86Pci.h \
+  /usr/include/X11/extensions/randr.h ../../../include/propertyst.h \
+  ../../../include/property.h ../../../hw/xfree86/common/xf86Resources.h \
+  ../../../hw/xfree86/os-support/xf86_OSproc.h ../../../include/opaque.h \
+  ../../../include/globals.h ../parser/xf86Parser.h \
+  ../parser/xf86Optrec.h ../../../hw/xfree86/common/xf86Config.h \
+  ../parser/xf86Optrec.h ../../../hw/xfree86/common/xf86Xinput.h \
+  ../../../include/inputstr.h ../../../include/dixstruct.h \
+  ../../../include/resource.h /usr/include/X11/extensions/XI.h \
+  /usr/include/X11/extensions/XIproto.h ../../../include/XIstubs.h \
+  ../../../hw/xfree86/os-support/xf86OSmouse.h \
+  ../../../hw/xfree86/common/xf86Xinput.h \
+  ../../../hw/xfree86/common/xf86xv.h ../../../Xext/xvdix.h \
+  ../../../include/scrnintstr.h /usr/include/X11/extensions/Xvproto.h \
+  ../../../hw/xfree86/common/xf86xvmc.h ../../../Xext/xvmcext.h \
+  /usr/include/X11/extensions/Xv.h ../../../Xext/xvdix.h \
+  ../../../hw/xfree86/common/xf86xv.h \
+  ../../../hw/xfree86/common/xf86cmap.h \
+  ../../../hw/xfree86/common/xf86fbman.h ../../../include/regionstr.h \
+  ../dixmods/extmod/dgaproc.h ../../../include/pixmap.h \
+  ../../../Xext/dpmsproc.h ../dixmods/extmod/vidmodeproc.h \
+  ../dixmods/extmod/xf86miscproc.h loader.h dlloader.h \
+  ../../../hw/xfree86/os-support/xf86_ansic.h ../../../include/misc.h \
+  ../../../hw/xfree86/os-support/xf86_libc.h \
+  ../../../hw/xfree86/common/xisb.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+  /usr/include/bits/confname.h /usr/include/getopt.h ../vbe/vbe.h \
+  ../int10/xf86int10.h ../../../hw/xfree86/os-support/bus/xf86Pci.h \
+  ../ddc/xf86DDC.h ../ddc/edid.h ../i2c/xf86i2c.h \
+  ../../../include/regionstr.h ../../../hw/xfree86/common/xf86str.h \
+  ../../../hw/xfree86/common/xf86sbusBus.h \
+  ../../../hw/xfree86/common/compiler.h ../modes/xf86Crtc.h ../ddc/edid.h \
+  ../../../randr/randrstr.h ../../../include/misc.h ../../../include/os.h \
+  ../../../include/dixstruct.h ../../../include/resource.h \
+  ../../../include/scrnintstr.h ../../../include/windowstr.h \
+  ../../../include/pixmapstr.h ../../../include/opaque.h \
+  ../../../include/pixmapstr.h ../../../include/extnsionst.h \
+  ../../../include/extension.h ../../../include/servermd.h \
+  /usr/include/X11/extensions/randrproto.h \
+  /usr/include/X11/extensions/render.h ../../../render/picturestr.h \
+  ../../../include/scrnintstr.h ../../../render/glyphstr.h \
+  /usr/include/X11/extensions/renderproto.h ../../../render/picture.h \
+  ../../../include/screenint.h ../../../include/regionstr.h \
+  ../../../include/miscstruct.h ../../../include/resource.h \
+  ../modes/xf86Modes.h ../../../hw/xfree86/common/xf86.h \
+  ../../../hw/xfree86/common/xorgVersion.h ../parser/xf86Parser.h \
+  ../ramdac/xf86Cursor.h ../../../hw/xfree86/common/xf86str.h \
+  ../../../mi/mipointer.h ../../../miext/damage/damage.h \
+  ../../../render/picturestr.h ../modes/xf86Modes.h \
+  ../modes/xf86RandR12.h ../../../randr/randrstr.h ../ddc/xf86DDC.h \
+  ../ramdac/xf86Cursor.h ../ramdac/xf86RamDac.h \
+  ../../../include/colormapst.h ../ramdac/xf86Cursor.h ../ramdac/BT.h \
+  ../ramdac/xf86RamDac.h ../ramdac/IBM.h ../ramdac/xf86RamDac.h \
+  ../ramdac/TI.h
+
+../../../include/xorg-config.h:
+
+../../../include/dix-config.h:
+
+../../../include/xkb-config.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-32.h:
+
+/usr/include/bits/fcntl.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/bits/types.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/stddef.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/time.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/bits/uio.h:
+
+/usr/include/sys/stat.h:
+
+/usr/include/bits/stat.h:
+
+/usr/include/setjmp.h:
+
+/usr/include/bits/setjmp.h:
+
+sym.h:
+
+../../../include/misc.h:
+
+/usr/include/X11/Xosdefs.h:
+
+/usr/include/X11/Xfuncproto.h:
+
+/usr/include/X11/Xmd.h:
+
+/usr/include/X11/X.h:
+
+/usr/include/X11/Xdefs.h:
+
+../../../include/os.h:
+
+../../../include/misc.h:
+
+/usr/include/X11/Xalloca.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/stdarg.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/gconv.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/X11/Xfuncs.h:
+
+/usr/include/string.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/alloca.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/limits.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.2.3/include/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/bits/posix2_lim.h:
+
+/usr/include/bits/xopen_lim.h:
+
+/usr/include/math.h:
+
+/usr/include/bits/huge_val.h:
+
+/usr/include/bits/huge_valf.h:
+
+/usr/include/bits/huge_vall.h:
+
+/usr/include/bits/inf.h:
+
+/usr/include/bits/nan.h:
+
+/usr/include/bits/mathdef.h:
+
+/usr/include/bits/mathcalls.h:
+
+/usr/include/bits/mathinline.h:
+
+/usr/include/assert.h:
+
+/usr/include/ctype.h:
+
+../../../mi/mi.h:
+
+../../../include/region.h:
+
+../../../include/regionstr.h:
+
+../../../include/miscstruct.h:
+
+/usr/include/X11/Xprotostr.h:
+
+../../../include/gc.h:
+
+/usr/include/X11/Xproto.h:
+
+../../../include/screenint.h:
+
+../../../include/pixmap.h:
+
+/usr/include/pixman-1/pixman.h:
+
+/usr/include/stdint.h:
+
+../../../include/validate.h:
+
+../../../include/window.h:
+
+../../../include/region.h:
+
+../../../include/gc.h:
+
+/usr/include/X11/fonts/font.h:
+
+/usr/include/X11/fonts/fsmasks.h:
+
+../../../include/input.h:
+
+../../../include/window.h:
+
+../../../include/cursor.h:
+
+../../../include/cursor.h:
+
+../../../mi/mipointer.h:
+
+loaderProcs.h:
+
+../../../hw/xfree86/common/xf86Module.h:
+
+../../../include/misc.h:
+
+../../../hw/xfree86/common/xf86Version.h:
+
+/usr/include/X11/fonts/fontmod.h:
+
+../../../hw/xfree86/os-support/bus/xf86Pci.h:
+
+/usr/include/X11/Xarch.h:
+
+../../../include/misc.h:
+
+../../../hw/xfree86/common/xf86.h:
+
+../../../hw/xfree86/common/xf86str.h:
+
+../../../include/input.h:
+
+../../../include/scrnintstr.h:
+
+../../../include/bstore.h:
+
+../../../include/bstorestr.h:
+
+../../../include/colormap.h:
+
+../../../include/cursor.h:
+
+../../../include/validate.h:
+
+../../../include/dix.h:
+
+../../../include/input.h:
+
+../../../include/pixmapstr.h:
+
+../../../include/colormapst.h:
+
+../../../hw/xfree86/common/xf86Module.h:
+
+../../../hw/xfree86/common/xf86Opt.h:
+
+../../../hw/xfree86/os-support/bus/xf86Pci.h:
+
+/usr/include/X11/extensions/randr.h:
+
+../../../include/propertyst.h:
+
+../../../include/property.h:
+
+../../../hw/xfree86/common/xf86Resources.h:
+
+../../../hw/xfree86/os-support/xf86_OSproc.h:
+
+../../../include/opaque.h:
+
+../../../include/globals.h:
+
+../parser/xf86Parser.h:
+
+../parser/xf86Optrec.h:
+
+../../../hw/xfree86/common/xf86Config.h:
+
+../parser/xf86Optrec.h:
+
+../../../hw/xfree86/common/xf86Xinput.h:
+
+../../../include/inputstr.h:
+
+../../../include/dixstruct.h:
+
+../../../include/resource.h:
+
+/usr/include/X11/extensions/XI.h:
+
+/usr/include/X11/extensions/XIproto.h:
+
+../../../include/XIstubs.h:
+
+../../../hw/xfree86/os-support/xf86OSmouse.h:
+
+../../../hw/xfree86/common/xf86Xinput.h:
+
+../../../hw/xfree86/common/xf86xv.h:
+
+../../../Xext/xvdix.h:
+
+../../../include/scrnintstr.h:
+
+/usr/include/X11/extensions/Xvproto.h:
+
+../../../hw/xfree86/common/xf86xvmc.h:
+
+../../../Xext/xvmcext.h:
+
+/usr/include/X11/extensions/Xv.h:
+
+../../../Xext/xvdix.h:
+
+../../../hw/xfree86/common/xf86xv.h:
+
+../../../hw/xfree86/common/xf86cmap.h:
+
+../../../hw/xfree86/common/xf86fbman.h:
+
+../../../include/regionstr.h:
+
+../dixmods/extmod/dgaproc.h:
+
+../../../include/pixmap.h:
+
+../../../Xext/dpmsproc.h:
+
+../dixmods/extmod/vidmodeproc.h:
+
+../dixmods/extmod/xf86miscproc.h:
+
+loader.h:
+
+dlloader.h:
+
+../../../hw/xfree86/os-support/xf86_ansic.h:
+
+../../../include/misc.h:
+
+../../../hw/xfree86/os-support/xf86_libc.h:
+
+../../../hw/xfree86/common/xisb.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+../vbe/vbe.h:
+
+../int10/xf86int10.h:
+
+../../../hw/xfree86/os-support/bus/xf86Pci.h:
+
+../ddc/xf86DDC.h:
+
+../ddc/edid.h:
+
+../i2c/xf86i2c.h:
+
+../../../include/regionstr.h:
+
+../../../hw/xfree86/common/xf86str.h:
+
+../../../hw/xfree86/common/xf86sbusBus.h:
+
+../../../hw/xfree86/common/compiler.h:
+
+../modes/xf86Crtc.h:
+
+../ddc/edid.h:
+
+../../../randr/randrstr.h:
+
+../../../include/misc.h:
+
+../../../include/os.h:
+
+../../../include/dixstruct.h:
+
+../../../include/resource.h:
+
+../../../include/scrnintstr.h:
+
+../../../include/windowstr.h:
+
+../../../include/pixmapstr.h:
+
+../../../include/opaque.h:
+
+../../../include/pixmapstr.h:
+
+../../../include/extnsionst.h:
+
+../../../include/extension.h:
+
+../../../include/servermd.h:
+
+/usr/include/X11/extensions/randrproto.h:
+
+/usr/include/X11/extensions/render.h:
+
+../../../render/picturestr.h:
+
+../../../include/scrnintstr.h:
+
+../../../render/glyphstr.h:
+
+/usr/include/X11/extensions/renderproto.h:
+
+../../../render/picture.h:
+
+../../../include/screenint.h:
+
+../../../include/regionstr.h:
+
+../../../include/miscstruct.h:
+
+../../../include/resource.h:
+
+../modes/xf86Modes.h:
+
+../../../hw/xfree86/common/xf86.h:
+
+../../../hw/xfree86/common/xorgVersion.h:
+
+../parser/xf86Parser.h:
+
+../ramdac/xf86Cursor.h:
+
+../../../hw/xfree86/common/xf86str.h:
+
+../../../mi/mipointer.h:
+
+../../../miext/damage/damage.h:
+
+../../../render/picturestr.h:
+
+../modes/xf86Modes.h:
+
+../modes/xf86RandR12.h:
+
+../../../randr/randrstr.h:
+
+../ddc/xf86DDC.h:
+
+../ramdac/xf86Cursor.h:
+
+../ramdac/xf86RamDac.h:
+
+../../../include/colormapst.h:
+
+../ramdac/xf86Cursor.h:
+
+../ramdac/BT.h:
+
+../ramdac/xf86RamDac.h:
+
+../ramdac/IBM.h:
+
+../ramdac/xf86RamDac.h:
+
+../ramdac/TI.h:
