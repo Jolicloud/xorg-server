@@ -1131,6 +1131,14 @@ ProcRenderAddGlyphs (ClientPtr client)
     gi = (xGlyphInfo *) (gids + nglyphs);
     bits = (CARD8 *) (gi + nglyphs);
     remain -= (sizeof (CARD32) + sizeof (xGlyphInfo)) * nglyphs;
+
+    /* protect against bad nglyphs */
+    if (gi < stuff || gi > ((CARD32 *)stuff + client->req_len) ||
+        bits < stuff || bits > ((CARD32 *)stuff + client->req_len)) {
+        err = BadLength;
+        goto bail;
+    }
+
     while (remain >= 0 && nglyphs)
     {
 	glyph = AllocateGlyph (gi, glyphSet->fdepth);
