@@ -17,3 +17,4 @@
 16-xaa-fbcomposite-fix-negative-size.diff
 17-xfree86-saner-conf-search-paths.diff
 18-Add-10-evdev.conf.diff
+19-compresize-fix.diff
