@@ -1,5 +1,6 @@
-xorg-server (2:1.7.7-3) UNRELEASED; urgency=low
+xorg-server (2:1.7.7-3) unstable; urgency=low
 
+  [ Julien Cristau ]
   * Drop lpia from the control file, it's dead.
   * Add Breaks on drivers abandoned between lenny and squeeze.  This helps apt
     decide to remove them instead of removing all of X.  Thanks, David
@@ -7,7 +8,7 @@ xorg-server (2:1.7.7-3) UNRELEASED; urgency=low
   * Add patch from Dave Airlie to fix crash in composite on allocation
     failure (closes: #588046).
 
- -- Julien Cristau <jcristau@debian.org>  Thu, 17 Jun 2010 15:15:20 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Thu, 15 Jul 2010 16:57:44 +0200
 
 xorg-server (2:1.7.7-2) unstable; urgency=low
 
