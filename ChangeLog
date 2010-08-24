@@ -1,3 +1,282 @@
+commit 4c313472c45de171efb76231e7c7f323aa4eda3f
+Author: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date:   Thu May 20 17:56:26 2010 -0700
+
+    Xserver(1) man page updates
+    
+    - Note that -br is now default.
+    - Move -bs after -br for alphabetical ordering.
+    - Remove -config option that's been hidden in "ignore" section,
+      since ajax removed the -config code a couple years back.
+    - Add -nocursor option.
+    - Add xinput & xrandr to list of runtime server control programs
+    - Replace XDarwin with Xquartz in list of Xservers
+    
+    Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 7b09335a46f9428141811230c69eef7968531359)
+
+commit 7787526a715a3179085bdc70110f5102a02706e3
+Author: Simon Farnsworth <simon.farnsworth@onelan.com>
+Date:   Tue Jun 22 10:13:30 2010 +0100
+
+    Don't crash when asked if a client that has disconnected was local
+    
+    ProcDRI2Dispatch uses LocalClient to determine if it's safe to respond
+    to a client that has made DRI2 requests which aren't sensible for
+    remote clients (anything but version). When the client has disappeared
+    mid-request stream (e.g. as a result of a kill -9, or a client-side
+    bug), LocalClient causes the X server to follow suit, as
+    ((OsCommPtr)client->osPrivate)->trans_conn is NULL at this point.
+    
+    The simple and obvious fix is to just return "not local" when
+    trans_conn is NULL, which fixes the crash I was seeing; however Keith
+    Packard pointed out that just checking trans_conn isn't enough;
+    quoting Keith:
+    
+    "This looks almost right to me -- I reviewed the os code to see when
+    _XSERVTransClose is called (which is what frees the trans_conn data) and
+    found that every place which called that immediately set trans_conn to
+    NULL, except for the call in CloseDownFileDescriptor which is only
+    called from CloseDownConnection and which is immediately followed by
+    freeing the OsCommRec and setting client->osPrivate to NULL. So, I'd
+    suggest checking client->osPrivate in addition to the above check."
+    
+    Signed-off-by: Simon Farnsworth <simon.farnsworth@onelan.com>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 660f6ab5494a728c3ca7ba00c305e9ff06c8ecb2)
+
+commit e1cf1e88bb527d48f7bdea5fc0091a1bd651acec
+Author: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date:   Thu Apr 29 18:45:34 2010 -0700
+
+    Fix compiler issues with getifaddrs() call on OpenSolaris
+    
+    OpenSolaris recently added support for the getifaddrs() API.
+    
+    Building with that uncovered two compiler issues (one warning, one error)
+    in the code that was now being built for the first time in our builds:
+    
+    "access.c", line 768: warning: argument #1 is incompatible with prototype:
+            prototype: pointer to struct sockaddr {unsigned short sa_family, array[14] of char sa_data} : "access.c", line 213
+            argument : pointer to struct sockaddr_storage {unsigned short ss_family, array[6] of char _ss_pad1, double _ss_align, array[240] of char _ss_pad2}
+    
+    "access.c", line 838: assignment type mismatch:
+            struct sockaddr {unsigned short sa_family, array[14] of char sa_data} "=" struct sockaddr_storage {unsigned short ss_family, array[6] of char _ss_pad1, double _ss_align, array[240] of char _ss_pad2}
+    
+    Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+    Reviewed-by: Jamey Sharp <jamey@minilop.net>
+    (cherry picked from commit e42a29d269fadc11e065c63ee369e3165196f2d7)
+
+commit c4717321c01678209ea5c7215d31556f6eadb798
+Author: Jesse Adkins <jesserayadkins@gmail.com>
+Date:   Wed Aug 4 23:39:14 2010 -0700
+
+    xfree86: parser: Never use constant strings for driver names (fixes #17438)
+    
+    When the parser sees the "keyboard" driver, it automatically (and
+     silently) replaces it with the constant string "kbd".
+    Everybody else uses malloc'd memory for the driver name, so input
+     device closure assumes it can use free.
+    Free val.str, so this crash doesn't turn into a memory leak. Whew.
+    
+    Signed-off-by: Jesse Adkins <jesserayadkins@gmail.com>
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    (cherry picked from commit bce12f2956f23c0ee53f7f6485dba631293a0931)
+
+commit 7c544986656713b5bbdb936bb7c3cb5a83d9f833
+Author: Keith Packard <keithp@keithp.com>
+Date:   Fri Aug 20 10:01:48 2010 -0700
+
+    fb: make isClipped always reject negative coordinates (bug 11503)
+    
+    A window with either dimension > 32767 can be positioned such that
+    coordinates > 32767 are visible on the screen. Attempts to draw to
+    those pixels will generate coordinates wrapped around to negative
+    values.
+    
+    The optimized clipping macro, 'isClipped', in fbbits.h, computes
+    clipping in window space rather than screen space using int16 values,
+    and so it too has coordinates wrapped around to negative values and
+    hence ends up accepting the wrapped drawing coordinates.
+    
+    Two possible fixes for this problem
+    
+     1) Detect wrapped region coordinates and clip those to 32767.
+     2) Detect negative incoming coordinates and reject those
+    
+    This patch takes the second approach as it is much shorter, simply
+    detecting when either X or Y incoming coordinate is negative, which
+    can never be 'within' any drawable.
+    
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    (cherry picked from commit 3e56efcfb63677cd8574e1e435e61d96f79ea536)
+
+commit f43e105ee8741c8be49a602b08752f2390f094f7
+Author: Chris Wilson <chris@chris-wilson.co.uk>
+Date:   Fri Aug 20 13:51:04 2010 +0100
+
+    edid: Adjust rounding of max_clock
+    
+    A simple hack to accommodate various EDID who have detailed modes that
+    exceed the EDID's max pixel clock. The pixel clock is only defined in
+    units of 10MHz and often appears as the maximum pixel code of the
+    detailed modes, rounded to the nearest 10MHz. Adjusting the max_clock to
+    include an extra 5MHz prevents the parser from rejecting the detailed
+    modes.
+    
+    The kernel uses the same fuzz and by including it in X we can use the
+    same modes in X as for the console.
+    
+    Fixes:
+    
+      Bug 23833 - X uses different refresh rate to that set by kernel module
+      https://bugs.freedesktop.org/show_bug.cgi?id=23833
+    
+    In the future, we will want to try harder to keep the KMS modes but at
+    the same time we need to apply the restrictions as specified by the
+    user's configuration, and need to fill in modes for fullscreen games on
+    fixed-mode panels.
+    
+    Reported-and-tested-by: Fabio Pedretti <fabio.ped@libero.it>
+    Signed-off-by: Chris Wilson <chris@chris-wilson.co.uk>
+    Reviewed-by: Alex Deucher <alexdeucher@gmail.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 951605b4660290044fb238bcf1d6d9e498567e8c)
+
+commit d5248f036470150bd68148755b47abbbae3bfb33
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Mon Jun 28 18:08:50 2010 -0400
+
+    render: Bounds check for nglyphs in ProcRenderAddGlyphs (#28801)
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    Reviewed-by: Julien Cristau <jcristau@debian.org>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 5725849a1b427cd4a72b84e57f211edb35838718)
+
+commit 845f0bb1b941e770d88c40afe029e2fedd8655d9
+Author: Chris Wilson <chris@chris-wilson.co.uk>
+Date:   Tue Aug 10 19:30:20 2010 +0100
+
+    xace: Invalid reference to out-of-scope data.
+    
+    The callback data passed by reference to the hook was allocated on stack
+    within the scope of the case statement. The compiler is free to reuse
+    any of that stack space whilst making the function call so we may end up
+    passing garbage into the callback.
+    
+    References:
+    
+      Bug 18451 - Xorg server 1.5.2 SEGV during XFixesGetCursorImage()
+      https://bugs.freedesktop.org/show_bug.cgi?id=18451
+    
+    v2: Drop the unrelated hunk that snuck in when ammending the commit
+    message.
+    
+    Signed-off-by: Chris Wilson <chris@chris-wilson.co.uk>
+    Reviewed-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 6dae7f3792611aace1df0cca63bf50c50d93de43)
+
+commit f07fc1461d38c8228d1bacf3d19932cac7bacddd
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Jun 11 10:12:52 2010 +1000
+
+    xkb: fix invalid memory writes in _XkbCopyGeom.
+    
+    Classic strlen/strcpy mistake of
+       foo = malloc(strlen(bar));
+       strcpy(foo, bar);
+    
+    Testcase: valgrind Xephyr :1
+    
+    ==8591== Invalid write of size 1
+    ==8591==    at 0x4A0638F: strcpy (mc_replace_strmem.c:311)
+    ==8591==    by 0x605593: _XkbCopyGeom (xkbUtils.c:1994)
+    ==8591==    by 0x605973: XkbCopyKeymap (xkbUtils.c:2118)
+    ==8591==    by 0x6122B3: InitKeyboardDeviceStruct (xkbInit.c:560)
+    ==8591==    by 0x4472E2: CoreKeyboardProc (devices.c:577)
+    ==8591==    by 0x447162: ActivateDevice (devices.c:530)
+    ==8591==    by 0x4475D6: InitCoreDevices (devices.c:672)
+    ==8591==    by 0x4449EE: main (main.c:254)
+    ==8591==  Address 0x6f96505 is 0 bytes after a block of size 53 alloc'd
+    ==8591==    at 0x4A0515D: malloc (vg_replace_malloc.c:195)
+    ==8591==    by 0x6054B7: _XkbCopyGeom (xkbUtils.c:1980)
+    ==8591==    by 0x605973: XkbCopyKeymap (xkbUtils.c:2118)
+    ==8591==    by 0x6122B3: InitKeyboardDeviceStruct (xkbInit.c:560)
+    ==8591==    by 0x4472E2: CoreKeyboardProc (devices.c:577)
+    ==8591==    by 0x447162: ActivateDevice (devices.c:530)
+    ==8591==    by 0x4475D6: InitCoreDevices (devices.c:672)
+    ==8591==    by 0x4449EE: main (main.c:254)
+    
+    Reported-by: Dave Airlie <airlied@redhat.com>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by-and-apologised-for: Daniel Stone <daniel@fooishbar.org>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 7f19a7a6e90a4fd7b7ec0256974f62e575218541)
+    
+    Conflicts:
+    
+    	xkb/xkbUtils.c
+    (cherry picked from commit f85552aa452d5f575fee9f6031a33ca79bdc3cc8)
+    
+    Signed-off-by: Julien Cristau <jcristau@debian.org>
+
+commit b9638391394d1f4797b5421fa4ccbe9d194eee5a
+Author: Pierre-Loup A. Griffais <pgriffais@nvidia.com>
+Date:   Wed Apr 21 18:11:05 2010 -0700
+
+    xf86: Don't crash when switching modes through RandR without owning the VT.
+    
+    While VT-switched, FB access is disabled and should remain so. Trying to switch
+    modes in that state would re-enable it, potentially causing crashes if trying
+    to access it before the driver has recovered from the mode switch.
+    
+    Signed-off-by: Pierre-Loup A. Griffais <pgriffais@nvidia.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 41bdb6c003cca3ef0ff88d9c7de318115bab1ba2)
+    
+    Signed-off-by: Julien Cristau <jcristau@debian.org>
+
+commit 5154dede3d53151f4bed43b0e1626abf64b91fc5
+Author: Éric Piel <E.A.B.Piel@tudelft.nl>
+Date:   Fri Jun 11 09:16:32 2010 -0700
+
+    exa: fix ExaCheckCopyNtoN for exa_classic when source = dest
+    
+    In case you want to copy a region with source = dest, you have the same pixmap
+    as source and dest.
+    
+    At the end of exaPixmapIsOffscreen_classic() the devPrivate.ptr is reset to
+    NULL (look at the sources).
+    
+    Now this is what happens in ExaCheckCopyNtoN:
+    
+    exaPrepareAccess( pDst );
+       Calls IsOffscreen()
+          sets devPrivate.ptr to NULL
+       sets up devPrivate.ptr to real pointer
+       Everything OK
+    exaPrepareAccess( pSrc );
+       Calls IsOffscreen()
+          sets devPrivate.ptr to NULL
+       BAILS OUT CAUSE OF NESTED OPERATION SINCE DST EQUALS SRC
+    
+    We end up with devPrivate.ptr as NULL, and that is clearly wrong.
+    
+    In particular this fixes a segfault when using the psb driver (bug 28077)
+    
+    Signed-off-by: Éric Piel <eric.piel@tremplin-utc.net>
+    Reviewed-by: Michel Dänzer <michel@daenzer.net>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 7e8f1001217326cc451974bacf25275420c4bb4e)
+
 commit f44ebbd3d52fa0dfdc51f6635721592b70affb6e
 Author: Cyril Brulebois <kibi@debian.org>
 Date:   Mon Mar 1 02:11:36 2010 +0100

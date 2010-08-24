@@ -3,6 +3,8 @@ xorg-server (2:1.7.7-4) UNRELEASED; urgency=low
   * Set default xkb rules to evdev on linux, to work around a wrong default in
     configure.ac and an Xorg issue where it reverts to the default on reset.
     Thanks to Bastian Blank for the report.
+  * Pull from server-1.7-nominations (commit 4c313472)
+    - fb: make isClipped always reject negative coordinates (closes: #320627)
 
  -- Julien Cristau <jcristau@debian.org>  Tue, 24 Aug 2010 14:51:54 +0200
 
