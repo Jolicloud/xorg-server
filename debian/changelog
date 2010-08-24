@@ -1,4 +1,4 @@
-xorg-server (2:1.7.7-4) UNRELEASED; urgency=low
+xorg-server (2:1.7.7-4) unstable; urgency=low
 
   * Set default xkb rules to evdev on linux, to work around a wrong default in
     configure.ac and an Xorg issue where it reverts to the default on reset.
@@ -6,7 +6,7 @@ xorg-server (2:1.7.7-4) UNRELEASED; urgency=low
   * Pull from server-1.7-nominations (commit 4c313472)
     - fb: make isClipped always reject negative coordinates (closes: #320627)
 
- -- Julien Cristau <jcristau@debian.org>  Tue, 24 Aug 2010 14:51:54 +0200
+ -- Julien Cristau <jcristau@debian.org>  Tue, 24 Aug 2010 16:03:30 +0200
 
 xorg-server (2:1.7.7-3) unstable; urgency=low
 
