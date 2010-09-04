@@ -1,3 +1,10 @@
+xorg-server (2:1.7.7-5) UNRELEASED; urgency=low
+
+  * Clean up RandR12 bits on screen close.  Avoids infinite recursion on
+    EnterVT in the second server generation (closes: #595386).
+
+ -- Julien Cristau <jcristau@debian.org>  Sat, 04 Sep 2010 11:48:10 +0200
+
 xorg-server (2:1.7.7-4) unstable; urgency=low
 
   * Set default xkb rules to evdev on linux, to work around a wrong default in
