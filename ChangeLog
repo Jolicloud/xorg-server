@@ -1,3 +1,36 @@
+commit 3336e1f7f3d7a0e37cc75f7edd96524dd6cf228a
+Author: Keith Packard <keithp@keithp.com>
+Date:   Mon Jul 12 16:01:34 2010 -0700
+
+    Unwrap/rewrap EnterVT/LeaveVT completely, Fixes 28998
+    
+    Because some EnterVT code needs to remove it self from the
+    call chain, we need to fix all of the wrappers to correctly
+    unwrap/rewrap during the call chain. This is a follow-on to the fix
+    for bug 27114 in commit 68a9ee8370e6f9b38218376ac92d5130a5b0ef1e.
+    
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    Tested-by: Jesse Barnes <jesse.barnes@intel.com>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+    Reviewed-by: Tiago Vignatti <tiago.vignatti@nokia.com>
+    (cherry picked from commit d75e8146c414bfd512ba5dbd4a83acb334bbe19b, and
+    conflict from b618705 fixed up)
+    Signed-off-by: Julien Cristau <jcristau@debian.org>
+
+commit 3fabfc198b6f22338f7691907db1b7c849ccac4c
+Author: Keith Packard <keithp@keithp.com>
+Date:   Fri May 7 22:56:04 2010 -0700
+
+    Clean up RandR12 bits on screen close (bug 27114)
+    
+    When resetting the server, pScrn->EnterVT must be unwrapped or the
+    next server generation will end up wrapping the wrapper and causing an
+    infinite recursion on EnterVT.
+    
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    Tested-by: Michael Stapelberg <michael+freedesktop@stapelberg.de>
+    (cherry picked from commit 68a9ee8370e6f9b38218376ac92d5130a5b0ef1e)
+
 commit 4c313472c45de171efb76231e7c7f323aa4eda3f
 Author: Alan Coopersmith <alan.coopersmith@oracle.com>
 Date:   Thu May 20 17:56:26 2010 -0700
