@@ -1,4 +1,4 @@
-xorg-server (2:1.7.7-6) UNRELEASED; urgency=low
+xorg-server (2:1.7.7-6) unstable; urgency=low
 
   * Unwrap/rewrap EnterVT/LeaveVT completely.  Because some EnterVT code needs
     to remove itself from the call chain, we need to fix all of the wrappers
@@ -6,7 +6,7 @@ xorg-server (2:1.7.7-6) UNRELEASED; urgency=low
     the previous upload, pointed out and tested by Sven Joachim, thanks!
     (closes: #596012, #595973, #595776)
 
- -- Julien Cristau <jcristau@debian.org>  Wed, 08 Sep 2010 18:58:18 +0200
+ -- Julien Cristau <jcristau@debian.org>  Wed, 08 Sep 2010 19:06:02 +0200
 
 xorg-server (2:1.7.7-5) unstable; urgency=low
 
