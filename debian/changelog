@@ -5,6 +5,8 @@ xorg-server (2:1.4.2-10.lenny3) UNRELEASED; urgency=low
     #555308).
   * Add patch by Olivier Fourdan (Red Hat) to fix the mod() macro in fb and
     mi.
+  * render: bounds check for nglyphs in ProcRenderAddGlyphs.
+  * fb: make isClipped always reject negative coordinates (closes: #320627)
 
  -- Julien Cristau <jcristau@debian.org>  Sat, 21 Nov 2009 13:09:36 +0100
 
