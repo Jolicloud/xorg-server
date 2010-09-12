@@ -1,3 +1,10 @@
+xorg-server (2:1.7.7-7) UNRELEASED; urgency=low
+
+  * Use linux-any instead of a list of architecture names for restrictions of
+    build-dependencies (closes: #594927).
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 12 Sep 2010 21:57:47 +0200
+
 xorg-server (2:1.7.7-6) unstable; urgency=low
 
   * Unwrap/rewrap EnterVT/LeaveVT completely.  Because some EnterVT code needs
