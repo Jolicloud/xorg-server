@@ -50,16 +50,16 @@ diff --git a/hw/xfree86/modes/xf86RandR12.c b/hw/xfree86/modes/xf86RandR12.c
 index 043ceee..c17b5fa 100644
 --- a/hw/xfree86/modes/xf86RandR12.c
 +++ b/hw/xfree86/modes/xf86RandR12.c
-@@ -686,7 +686,7 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
+@@ -687,7 +687,7 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
      ScrnInfoPtr		pScrn = XF86SCRNINFO(pScreen);
      xf86CrtcConfigPtr	config = XF86_CRTC_CONFIG_PTR(pScrn);
-     WindowPtr		pRoot = pScreen->root;
+     WindowPtr		pRoot = WindowTable[pScreen->myNum];
 -    PixmapPtr		pScrnPix = (*pScreen->GetScreenPixmap)(pScreen);
 +    PixmapPtr		pScrnPix;
      Bool		ret = FALSE;
      int                 c;
  
-@@ -727,6 +727,7 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
+@@ -728,6 +728,7 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
  	}
      }
  
@@ -104,7 +104,7 @@ diff --git a/hw/xfree86/modes/xf86RandR12.c b/hw/xfree86/modes/xf86RandR12.c
 index c17b5fa..b334b3c 100644
 --- a/hw/xfree86/modes/xf86RandR12.c
 +++ b/hw/xfree86/modes/xf86RandR12.c
-@@ -728,6 +728,13 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
+@@ -729,6 +729,13 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
      }
  
      pScrnPix = (*pScreen->GetScreenPixmap)(pScreen);
