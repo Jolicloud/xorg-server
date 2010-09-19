@@ -7,6 +7,8 @@ xorg-server (2:1.4.2-10.lenny3) UNRELEASED; urgency=low
     mi.
   * render: bounds check for nglyphs in ProcRenderAddGlyphs.
   * fb: make isClipped always reject negative coordinates (closes: #320627)
+  * xvfb-run: don't pass the magic cookie to xauth on the command line
+    (CVE-2009-1573).  Thanks, Loïc Minier!
 
  -- Julien Cristau <jcristau@debian.org>  Sat, 21 Nov 2009 13:09:36 +0100
 
