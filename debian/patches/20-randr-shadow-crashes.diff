@@ -1,0 +1,122 @@
+From: Chris Wilson <chris@chris-wilson.co.uk>
+To: xorg-devel@lists.x.org
+Subject: [PATCH 1/3] modes: Beware the driver switching root pixmaps
+Date: Tue, 14 Sep 2010 14:13:39 +0100
+Message-Id: <1284470021-16577-2-git-send-email-chris@chris-wilson.co.uk>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1284470021-16577-1-git-send-email-chris@chris-wilson.co.uk>
+References: <1284470021-16577-1-git-send-email-chris@chris-wilson.co.uk>
+Cc: Julien Cristau <jcristau@debian.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Length: 2264
+
+Program received signal SIGSEGV, Segmentation fault.
+0x080d4a2d in xf86RandR12ScreenSetSize (pScreen=0x8dca3a0, width=800,
+    height=600, mmWidth=210, mmHeight=157)
+    at ../../../../hw/xfree86/modes/xf86RandR12.c:731
+731     ../../../../hw/xfree86/modes/xf86RandR12.c: No such file or directory.
+        in ../../../../hw/xfree86/modes/xf86RandR12.c
+(gdb) bt full
+    height=600, mmWidth=210, mmHeight=157)
+    at ../../../../hw/xfree86/modes/xf86RandR12.c:731
+        randrp = 0x8dcae68
+        pScrn = 0x8dbeb28
+        config = <value optimized out>
+        pRoot = 0x8e08e30
+        pScrnPix = 0xb6d12008
+        ret = 1
+        c = <value optimized out>
+    mmWidth=210, mmHeight=157) at ../../randr/rrscreen.c:185
+No locals.
+    at ../../randr/rrscreen.c:307
+        pWin = 0x8e08e30
+        pScreen = 0x8dca3a0
+        i = <value optimized out>
+        rc = 0
+../../randr/randr.c:485
+
+Signed-off-by: Chris Wilson <chris@chris-wilson.co.uk>
+Cc: Julien Cristau <jcristau@debian.org>
+Tested-by: Julien Cristau <jcristau@debian.org>
+Cc: Keith Packard <keithp@keithp.com>
+Reviewed-by: Keith Packard <keithp@keithp.com>
+---
+ hw/xfree86/modes/xf86RandR12.c |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/hw/xfree86/modes/xf86RandR12.c b/hw/xfree86/modes/xf86RandR12.c
+index 043ceee..c17b5fa 100644
+--- a/hw/xfree86/modes/xf86RandR12.c
++++ b/hw/xfree86/modes/xf86RandR12.c
+@@ -686,7 +686,7 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
+     ScrnInfoPtr		pScrn = XF86SCRNINFO(pScreen);
+     xf86CrtcConfigPtr	config = XF86_CRTC_CONFIG_PTR(pScrn);
+     WindowPtr		pRoot = pScreen->root;
+-    PixmapPtr		pScrnPix = (*pScreen->GetScreenPixmap)(pScreen);
++    PixmapPtr		pScrnPix;
+     Bool		ret = FALSE;
+     int                 c;
+ 
+@@ -727,6 +727,7 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
+ 	}
+     }
+ 
++    pScrnPix = (*pScreen->GetScreenPixmap)(pScreen);
+     pScreen->width = pScrnPix->drawable.width = width;
+     pScreen->height = pScrnPix->drawable.height = height;
+     randrp->mmWidth = pScreen->mmWidth = mmWidth;
+-- 
+1.7.1
+
+From: Chris Wilson <chris@chris-wilson.co.uk>
+To: xorg-devel@lists.x.org
+Subject: [PATCH 2/3] modes: Update pixmapPrivate after driver->resize() calls
+	ModifyPixmapHeader
+Date: Tue, 14 Sep 2010 14:13:40 +0100
+Message-Id: <1284470021-16577-3-git-send-email-chris@chris-wilson.co.uk>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1284470021-16577-1-git-send-email-chris@chris-wilson.co.uk>
+References: <1284470021-16577-1-git-send-email-chris@chris-wilson.co.uk>
+Cc: Julien Cristau <jcristau@debian.org>,
+	Andrew Guertin <lists@dolphinling.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Length: 1542
+
+As with xf86SwitchMode(), if the driver modifies the Screen pixmap header
+in the course of resizing the framebuffer, this change needs to be
+propagated to the ScrnInfo->pixmapPrivate or else the pixmap header will
+be overwritten by xf86EnableDisableFBAccess().
+
+Signed-off-by: Chris Wilson <chris@chris-wilson.co.uk>
+Cc: Julien Cristau <jcristau@debian.org>
+Cc: Andrew Guertin <lists@dolphinling.net>
+Tested-by: Julien Cristau <jcristau@debian.org>
+Cc: Keith Packard <keithp@keithp.com>
+---
+ hw/xfree86/modes/xf86RandR12.c |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
+
+diff --git a/hw/xfree86/modes/xf86RandR12.c b/hw/xfree86/modes/xf86RandR12.c
+index c17b5fa..b334b3c 100644
+--- a/hw/xfree86/modes/xf86RandR12.c
++++ b/hw/xfree86/modes/xf86RandR12.c
+@@ -728,6 +728,13 @@ xf86RandR12ScreenSetSize (ScreenPtr	pScreen,
+     }
+ 
+     pScrnPix = (*pScreen->GetScreenPixmap)(pScreen);
++    /*
++     * Get the new Screen pixmap ptr as resize() might have called
++     * ModifyPixmapHeader and xf86EnableDisableFBAccess will put it back...
++     * Unfortunately.
++     */
++    if (pScrnPix->devPrivate.ptr)
++       pScrn->pixmapPrivate = pScrnPix->devPrivate;
+     pScreen->width = pScrnPix->drawable.width = width;
+     pScreen->height = pScrnPix->drawable.height = height;
+     randrp->mmWidth = pScreen->mmWidth = mmWidth;
+-- 
+1.7.1

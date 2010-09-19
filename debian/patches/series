@@ -18,3 +18,4 @@
 17-xfree86-saner-conf-search-paths.diff
 18-Add-10-evdev.conf.diff
 19-compresize-fix.diff
+20-randr-shadow-crashes.diff
