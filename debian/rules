@@ -141,6 +141,7 @@ confflags_main = \
 	--enable-xephyr \
 	$(build_xfbdev) \
 	--with-sha1=libgcrypt \
+	--enable-xcsecurity \
 	$(void)
 
 confflags_udeb = \
