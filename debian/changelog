@@ -1,9 +1,9 @@
-xorg-server (2:1.7.7-8) UNRELEASED; urgency=low
+xorg-server (2:1.7.7-8) unstable; urgency=low
 
   * Pass --enable-xcsecurity to the main build to restore the XC-SECURITY
     extension, thanks to Stefan Fritsch's report (Closes: #599657).
 
- -- Cyril Brulebois <kibi@debian.org>  Sun, 10 Oct 2010 06:38:20 +0200
+ -- Cyril Brulebois <kibi@debian.org>  Sun, 10 Oct 2010 12:43:51 +0200
 
 xorg-server (2:1.7.7-7) unstable; urgency=low
 
