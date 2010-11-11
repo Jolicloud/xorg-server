@@ -1,3 +1,10 @@
+xorg-server (2:1.7.7-9) UNRELEASED; urgency=low
+
+  * Stolen from RHEL6: only list the device mode in XIQueryDevice, not the
+    proximity bit.
+
+ -- Julien Cristau <jcristau@debian.org>  Thu, 11 Nov 2010 12:46:28 +0100
+
 xorg-server (2:1.7.7-8) unstable; urgency=low
 
   * Pass --enable-xcsecurity to the main build to restore the XC-SECURITY
