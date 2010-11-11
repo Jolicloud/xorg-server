@@ -2,6 +2,18 @@ xorg-server (2:1.7.7-9) UNRELEASED; urgency=low
 
   * Stolen from RHEL6: only list the device mode in XIQueryDevice, not the
     proximity bit.
+  * Cherry-pick a bunch more patches from upstream (most seen in RHEL6):
+    - os: Return BadLength instead of disconnecting BigReq clients
+    - dix: Default DPMS timeout values to match screensaver values
+    - fix a sign problem with valuator data
+    - Revert "dix: use the event mask of the grab for TryClientEvents."
+    - rotation: fix cursor and overlap of one pixel
+    - Xi: don't copy the modifier key count when copying device classes
+    - randr: prevent an unnecessary screen resize with multiple displays
+    - Change keyboard controls on slave keyboards
+    - Don't coredump on "X -showopts"
+    - xkb: Fix omissions in geometry initialization
+    - ddc: Don't probe for DDC/CI or EEPROM
 
  -- Julien Cristau <jcristau@debian.org>  Thu, 11 Nov 2010 12:46:28 +0100
 

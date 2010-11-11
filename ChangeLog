@@ -1,3 +1,251 @@
+commit e735a4ade45c12306958390c2191ed0dc8084ef7
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Mon Oct 18 15:42:54 2010 -0400
+
+    ddc: Don't probe for DDC/CI or EEPROM
+    
+    For whatever reason, some (broken) monitors will crash if you do this.
+    We're not actually using this information for anything, so let's just
+    not do it.
+    
+    Originally reported as http://bugzilla.redhat.com/620333
+    
+    Reviewed-by: Alex Deucher <alexdeucher@gmail.com>
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    (cherry picked from commit d2064fbb687839c297a851a5d85f32dfbbe4a0d5)
+    (cherry picked from commit e01d69c6e794d836d9f25870349f3164dbd831ae)
+
+commit d7c2f764b399152eeaaf18b82abaf941574e6744
+Author: Dirk Wallenstein <halsmit@t-online.de>
+Date:   Sat Apr 17 21:36:23 2010 +0200
+
+    xkb: Fix omissions in geometry initialization #27679
+    
+    _XkbCopyGeom did not copy all of the data from the source geometry. This
+    resulted in failures when trying to obtain the keymap from a server
+    where the default geometry has not been replaced by a custom
+    configuration.
+    
+    Signed-off-by: Dirk Wallenstein <halsmit@t-online.de>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    (cherry picked from commit bac1c5f1be4588b2b1eb646ee98a5442e1b767d5)
+
+commit 8981b0a99ca5828ddc1b375c269aa493af40e6fd
+Author: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date:   Sat Jun 12 08:19:16 2010 -0700
+
+    Don't coredump on "X -showopts" (bug 25874)
+    
+    Don't try walking the xf86ConfigLayout.screens table if it's empty
+    https://bugs.freedesktop.org/show_bug.cgi?id=25874
+    
+    Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+    Reviewed-by: Tiago Vignatti <tiago.vignatti@nokia.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit b8615d592700b7be319c04cc0563fdeb5a266534)
+
+commit a3e6e599f50902712f4a10fdbf806371335aaed3
+Author: Nicolas George <nicolas.george@normalesup.org>
+Date:   Wed Jun 2 13:40:51 2010 +0200
+
+    Change keyboard controls on slave keyboards (#27926)
+    
+    Makes the use of IsMaster in ProcChangeKeyboardControl consistent with other
+    similar loops.
+    
+    Signed-off-by: Nicolas George <nicolas.george@normalesup.org>
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    (cherry picked from commit 968a79dcf5e17ac3963953ef56b8f94dbd75323b)
+
+commit 48407d86e3be526826c2207886ec304779c93f78
+Author: Ben Skeggs <bskeggs@redhat.com>
+Date:   Mon Jun 7 10:21:18 2010 +1000
+
+    randr: prevent an unnecessary screen resize with multiple displays
+    
+    crtc->{x,y} is always 0 when xf86DefaultScreenLimits() is called, so we
+    calculate too small an area for the initial framebuffer and force a resize
+    to happen.
+    
+    This commit fixes the code to use desired{X,Y} instead, which contains the
+    initial output positions.
+    
+    Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+    Reviewed-by: Dave Airlie <airlied@redhat.com>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit f7af00e9f0e0e1d854b0e882378c032518ab71ca)
+
+commit a6374668bda2cb78736e5f603f048adea1822d08
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Jun 10 12:21:36 2010 +1000
+
+    Xi: don't copy the modifier key count when copying device classes (#25480)
+    
+    The modifier key count is maintained by the XKB layer and
+    increased/decreased for all modifiers that set state.
+    
+    Test case, MD/SD modifier key count in comment:
+    1. keyboard 1: press and hold Shift_L    # SD:1     MD:1
+    2. keyboard 2: press and release Shift_L # SD:1,0   MD:1,0
+    <class copy happens>                     # SD:1     MD:1
+    3. keyboard 1: release Shift_L           # SD:0     MD:1
+    4. keyboard 1: press and release Shift_L # SD:1,0   MD:2,1
+    
+    The modifier is now logically down on the MD but not on keyboard 1 or
+    keyboard 2.
+    
+    XKB is layered in before the DIX, it increases/decreases the modifier key
+    count accordingly. In the above example, during (2), the MD gets the key
+    release and thus clears the modifier bit. (3) doesn't forward the release to
+    the MD because it is already cleared. The copy of modifierKeysDown when the
+    lastSlave changes however increases the counter for the held key. On (4),
+    the press and release are both forwarded to the MD, causing a offset by 1
+    and thus do not clear the logical modifier state.
+    
+    X.Org Bug 25480 <http://bugs.freedesktop.org/show_bug.cgi?id=25480>
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Acked-by: Daniel Stone <daniel@fooishbar.org>
+    (cherry picked from commit dc614484f93b67e8b62dbb1bb2fd247fe5a4c850)
+
+commit 6892697640701563921630295597be7f168cf55e
+Author: Dave Airlie <airlied@redhat.com>
+Date:   Mon Jun 21 10:05:08 2010 +1000
+
+    rotation: fix cursor and overlap of one pixel.
+    
+    Commit 77c7a64e8885696665556c9fbcb3cffb552e367a was introduced to fix
+    a cursor off by one on Intel hw, however it also move the whole crtc
+    into an off by one position and you could see gnom-eshell overlapping.
+    
+    This commit reverts that and instead fixes the cursor hotspot
+    translation to work like pixman does. We add 0.5 to the cursor vector
+    before translating, and floor the value afterwards.
+    
+    Thanks to Soeren (ssp) for pointing out where the real problem was
+    after explaning how pixman translates points.
+    
+    Signed-off-by: Dave Airlie <airlied@redhat.com>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 80d1a548d6ce73c2ff097536c1bc7044bf74965d)
+
+commit 06fda4d3c8d0fdf1c533dcb91b60592a75f4ee3f
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Jun 24 12:52:53 2010 +1000
+
+    Revert "dix: use the event mask of the grab for TryClientEvents."
+    
+    Behaviour of earlier X servers was to deliver the ButtonPress event
+    unconditionally, regardless of the actual event mask being set. This is
+    documented in the protocol:
+    "This request establishes a passive grab.  In the future, the pointer is
+    actively grabbed as described in GrabPointer, the last-pointer-grab time is
+    set to the time at which the button was pressed (as transmitted in the
+    ButtonPress event), and the ButtonPress event is reported if all of the
+    following conditions are true:
+        <list of conditions, event mask is not one of them>"
+    
+    Thus, a GrabButton event will always deliver the button press event, a
+    GrabKey always the key press event, etc. Same goes for XI and XI2.
+    
+    Reproducible with a simple client requesting a button grab in the form of:
+        XGrabButton(dpy, AnyButton, AnyModifier, win, True, ButtonReleaseMask,
+                    GrabModeAsync, GrabModeAsync, None, None);
+    
+    On servers before MPX/XI2, the client will receive a button press and
+    release event. On current servers, the client receives only the release.
+    Clients that expect the press event to be delivered unconditionally.
+    
+    XTS Xlib13 XGrabButton 5/39 now passes.
+    
+    This reverts commit 48585bd1e3e98db0f3df1ecc68022510216e00cc.
+    Effectively reverts commit 1c612acca8568fcdf9761d23f112adaf4d496f1b as well,
+    the code introduced with 1c612 is not needed anymore.
+    
+    Conflicts:
+    
+    	dix/events.c
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Acked-by: Daniel Stone <daniel@fooishbar.org>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 1884db430a5680e37e94726dff46686e2218d525)
+
+commit 2fce4783f41b7fb1106b2945cc98bfc8da39501d
+Author: Joe Shaw <joeshaw@litl.com>
+Date:   Thu Oct 14 15:09:20 2010 -0400
+
+    fix a sign problem with valuator data.
+    
+    Without this patch, any negative valuator value is wrong when returned
+    from XQueryDeviceState().  This is a regression from at least xserver
+    1.4.
+    
+    Valuator data is set in dix/getevents.c:set_valuators() by copying
+    signed int values into an unsigned int field
+    DeviceEvent.valuators.data.
+    
+    That data is converted into a double with an implicit cast by
+    assignment to axisVal[i] in Xi/exevents.c:UpdateDeviceState().
+    
+    That double is converted back to a signed int in
+    queryst.c:ProcXQueryDeviceState().  If the original value in
+    set_valuators() is negative, the double value will be > 2^31 and the
+    conversion back to a signed int is undefined.  (Although I
+    consistently see the value -2^31.)
+    
+    Fix this by changing the definition of DeviceEvent.valuators.data from
+    uint32_t to int32_t.
+    
+    Signed-off-by: Joe Shaw <joeshaw@litl.com>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    (cherry picked from commit e354ccac36a8ee3a23bdc845833c16a5646cc200)
+
+commit 9d939ea0f42954f40bbc8388b7c7f62470cdf338
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Mon Feb 15 16:54:35 2010 -0500
+
+    dix: Default DPMS timeout values to match screensaver values
+    
+    These have the same default, but if you specify something different with
+    -s on the command line, only the screensaver time is changed.  As DPMS
+    is usually what's desired, change it to match.
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 2a763c9023b8bc978b32eaa56d2c625b6f2badee)
+
+commit 0ca9f07f7349afc41bdb68a8956c24be1d7d779e
+Author: Aaron Plattner <aplattner@nvidia.com>
+Date:   Fri Aug 27 10:20:29 2010 -0700
+
+    os: Return BadLength instead of disconnecting BigReq clients (#4565)
+    
+    If a client sends a big request that's too big (i.e. bigger than
+    maxBigRequestSize << 2 bytes), the server just disconnects it.  This makes the
+    client receive SIGPIPE the next time it tries to send something.
+    
+    The X Test Suite sends requests that are too big when the test specifies the
+    TOO_LONG test type.  When the client receives SIGPIPE, XTS marks it as
+    UNRESOLVED, which counts as a failure.
+    
+    Instead, remember how long the request is supposed to be and then return that
+    size.  Dispatch() checks the length and sends BadLength to the client.  Then,
+    whenever oci->ignoreBytes is nonzero, ignore the data read instead of trying to
+    process it as a request.
+    
+    Signed-off-by: Aaron Plattner <aplattner@nvidia.com>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit cf88363db0ebb42df7cc286b85d30d7898aea840)
+
 commit 3336e1f7f3d7a0e37cc75f7edd96524dd6cf228a
 Author: Keith Packard <keithp@keithp.com>
 Date:   Mon Jul 12 16:01:34 2010 -0700
