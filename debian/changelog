@@ -1,3 +1,9 @@
+xorg-server (2:1.7.7-10) UNRELEASED; urgency=low
+
+  * render: Fix byteswapping of gradient stops
+
+ -- Julien Cristau <jcristau@debian.org>  Thu, 18 Nov 2010 16:46:32 +0100
+
 xorg-server (2:1.7.7-9) unstable; urgency=low
 
   * The "Hello RHEL6" upload.

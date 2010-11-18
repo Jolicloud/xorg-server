@@ -1,0 +1,41 @@
+From: Andrea Canciani <ranma42@gmail.com>
+Date: Tue,  2 Nov 2010 20:10:32 +0100
+To: xorg-devel@lists.x.org
+Cc: Andrea Canciani <ranma42@gmail.com>
+Subject: [PATCH 2/2] render: Fix byteswapping of gradient stops
+Message-Id: <1288725032-684-2-git-send-email-ranma42@gmail.com>
+
+The function swapStops repeatedly swaps the color components as
+CARD16, but incorrectly steps over them as if they were CARD32.
+
+This causes half of the stops not to be swapped at all and some
+unrelated data be swapped instead.
+
+Reviewed-by: Soren Sandmann <sandmann@daimi.au.dk>
+---
+ render/render.c |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/render/render.c b/render/render.c
+index 00241f9..85a4392 100644
+--- a/render/render.c
++++ b/render/render.c
+@@ -2552,8 +2552,8 @@ static void swapStops(void *stuff, int num)
+     }
+     colors = (CARD16 *)(stops);
+     for (i = 0; i < 4*num; ++i) {
+-        swaps(stops, n);
+-        ++stops;
++        swaps(colors, n);
++        ++colors;
+     }
+ }
+ 
+-- 
+1.7.1
+
+_______________________________________________
+xorg-devel@lists.x.org: X.Org development
+Archives: http://lists.x.org/archives/xorg-devel
+Info: http://lists.x.org/mailman/listinfo/xorg-devel
+

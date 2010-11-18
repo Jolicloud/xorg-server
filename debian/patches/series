@@ -20,3 +20,4 @@
 19-compresize-fix.diff
 20-randr-shadow-crashes.diff
 21-device-mode-list.diff
+22-render-swap-stops.diff
