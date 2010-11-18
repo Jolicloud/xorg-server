@@ -1,4 +1,41 @@
-commit e735a4ade45c12306958390c2191ed0dc8084ef7
+commit c9bca39848add875a76cf2434aabbadb97ddd721
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Jun 9 17:10:57 2010 +1000
+
+    Xi: move property reset from extension shutdown to init.
+    
+    If any part of the stack calls XIGetKnownProperty during device shutdown
+    the property is re-initialized before the server generation resets, leaving
+    the value invalid again.
+    
+    Move the reset to the extension init which happens before input devices are
+    initialized before the first property is requested.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Julien Cristau <jcristau@debian.org>
+    (cherry picked from commit 5cd11d2356d153840f1b429bdb8284367f8dc468)
+
+commit 266dc682f623a2aca6654c42164a8d8b9362c53b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri May 7 16:22:12 2010 +1000
+
+    Xi: reset the known properties at the end of the server generation.
+    
+    Properties allocated through XIGetKnownProperty() aren't reset on the second
+    server generation but keep the old value. As a result, wrong Atoms are
+    supplied to the driver, resulting in potential data corruption or weird
+    error message.
+    
+    Reproducible by running "xlsatom | grep FLOAT" twice on a plain X server.
+    The second X server generation won't have the FLOAT atom defined anymore,
+    despite the users of this atom not noticing any errors.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Julien Cristau <jcristau@debian.org>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 9802839d35aaf788790f1d0e8300db4693a70096)
+
+commit 240e7c50cecdcc0ce6087e141f11f165d828a7e9
 Author: Adam Jackson <ajax@redhat.com>
 Date:   Mon Oct 18 15:42:54 2010 -0400
 
@@ -13,7 +50,6 @@ Date:   Mon Oct 18 15:42:54 2010 -0400
     Reviewed-by: Alex Deucher <alexdeucher@gmail.com>
     Signed-off-by: Adam Jackson <ajax@redhat.com>
     (cherry picked from commit d2064fbb687839c297a851a5d85f32dfbbe4a0d5)
-    (cherry picked from commit e01d69c6e794d836d9f25870349f3164dbd831ae)
 
 commit d7c2f764b399152eeaaf18b82abaf941574e6744
 Author: Dirk Wallenstein <halsmit@t-online.de>
