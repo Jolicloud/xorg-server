@@ -8,8 +8,8 @@ aa91508356f243edc3b11795b1481edcfe0d39c2
 ---
 Index: xorg-server/config/Makefile.am
 ===================================================================
---- xorg-server.orig/config/Makefile.am	2010-03-30 13:22:30.000000000 +0300
-+++ xorg-server/config/Makefile.am	2010-03-30 13:55:51.000000000 +0300
+--- xorg-server.orig/config/Makefile.am
++++ xorg-server/config/Makefile.am
 @@ -1,12 +1,20 @@
 -AM_CFLAGS = @DIX_CFLAGS@
 +AM_CFLAGS = $(DIX_CFLAGS)
@@ -34,7 +34,7 @@ Index: xorg-server/config/Makefile.am
  
  if CONFIG_DBUS_API
  dbusconfigdir = $(sysconfdir)/dbus-1/system.d
-@@ -16,7 +24,13 @@
+@@ -16,7 +24,13 @@ libconfig_la_SOURCES += dbus.c
  endif
  
  if CONFIG_HAL
@@ -50,8 +50,8 @@ Index: xorg-server/config/Makefile.am
  EXTRA_DIST = xorg-server.conf x11-input.fdi
 Index: xorg-server/config/config-backends.h
 ===================================================================
---- xorg-server.orig/config/config-backends.h	2010-03-30 13:22:30.000000000 +0300
-+++ xorg-server/config/config-backends.h	2010-03-30 13:55:51.000000000 +0300
+--- xorg-server.orig/config/config-backends.h
++++ xorg-server/config/config-backends.h
 @@ -26,8 +26,18 @@
  #ifdef HAVE_DIX_CONFIG_H
  #include <dix-config.h>
@@ -72,7 +72,7 @@ Index: xorg-server/config/config-backends.h
  #include <dbus/dbus.h>
  
  typedef void (*config_dbus_core_connect_hook)(DBusConnection *connection,
-@@ -46,14 +56,15 @@
+@@ -46,14 +56,15 @@ int config_dbus_core_init(void);
  void config_dbus_core_fini(void);
  int config_dbus_core_add_hook(struct config_dbus_core_hook *hook);
  void config_dbus_core_remove_hook(struct config_dbus_core_hook *hook);
@@ -94,8 +94,8 @@ Index: xorg-server/config/config-backends.h
  #endif
 Index: xorg-server/config/config.c
 ===================================================================
---- xorg-server.orig/config/config.c	2010-03-30 13:22:30.000000000 +0300
-+++ xorg-server/config/config.c	2010-03-30 13:55:51.000000000 +0300
+--- xorg-server.orig/config/config.c
++++ xorg-server/config/config.c
 @@ -28,13 +28,17 @@
  #endif
  
@@ -115,7 +115,7 @@ Index: xorg-server/config/config.c
      if (config_dbus_core_init()) {
  # ifdef CONFIG_DBUS_API
         if (!config_dbus_init())
-@@ -54,7 +58,9 @@
+@@ -54,7 +58,9 @@ config_init(void)
  void
  config_fini(void)
  {
@@ -126,7 +126,7 @@ Index: xorg-server/config/config.c
  # ifdef CONFIG_HAL
      config_hal_fini();
  # endif
-@@ -64,3 +70,70 @@
+@@ -64,3 +70,70 @@ config_fini(void)
      config_dbus_core_fini();
  #endif
  }
@@ -199,9 +199,9 @@ Index: xorg-server/config/config.c
 +}
 Index: xorg-server/config/hal.c
 ===================================================================
---- xorg-server.orig/config/hal.c	2010-03-30 13:55:48.000000000 +0300
-+++ xorg-server/config/hal.c	2010-03-30 13:55:51.000000000 +0300
-@@ -58,25 +58,9 @@
+--- xorg-server.orig/config/hal.c
++++ xorg-server/config/hal.c
+@@ -58,25 +58,9 @@ struct xkb_options {
      char* options;
  };
  
@@ -227,7 +227,7 @@ Index: xorg-server/config/hal.c
      char *value;
  
      value = xalloc(strlen(udi) + 5); /* "hal:" + NULL */
-@@ -84,36 +68,11 @@
+@@ -84,36 +68,11 @@ device_removed(LibHalContext *ctx, const
          return;
      sprintf(value, "hal:%s", udi);
  
@@ -265,7 +265,7 @@ Index: xorg-server/config/hal.c
  static char *
  get_prop_string(LibHalContext *hal_ctx, const char *udi, const char *name)
  {
-@@ -166,26 +125,6 @@
+@@ -166,26 +125,6 @@ get_prop_string_array(LibHalContext *hal
      return ret;
  }
  
@@ -294,8 +294,8 @@ Index: xorg-server/config/hal.c
  {
 Index: xorg-server/config/udev.c
 ===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ xorg-server/config/udev.c	2010-03-30 13:56:07.000000000 +0300
+--- /dev/null
++++ xorg-server/config/udev.c
 @@ -0,0 +1,267 @@
 +/*
 + * Copyright © 2009 Julien Cristau
@@ -566,9 +566,9 @@ Index: xorg-server/config/udev.c
 +}
 Index: xorg-server/configure.ac
 ===================================================================
---- xorg-server.orig/configure.ac	2010-03-30 13:55:48.000000000 +0300
-+++ xorg-server/configure.ac	2010-03-30 13:55:51.000000000 +0300
-@@ -601,6 +601,7 @@
+--- xorg-server.orig/configure.ac
++++ xorg-server/configure.ac
+@@ -601,6 +601,7 @@ AC_ARG_ENABLE(multibuffer,    AS_HELP_ST
  AC_ARG_ENABLE(dbe,            AS_HELP_STRING([--disable-dbe], [Build DBE extension (default: enabled)]), [DBE=$enableval], [DBE=yes])
  AC_ARG_ENABLE(xf86bigfont,    AS_HELP_STRING([--disable-xf86bigfont], [Build XF86 Big Font extension (default: disabled)]), [XF86BIGFONT=$enableval], [XF86BIGFONT=no])
  AC_ARG_ENABLE(dpms,           AS_HELP_STRING([--disable-dpms], [Build DPMS extension (default: enabled)]), [DPMSExtension=$enableval], [DPMSExtension=yes])
@@ -576,7 +576,7 @@ Index: xorg-server/configure.ac
  AC_ARG_ENABLE(config-dbus,    AS_HELP_STRING([--enable-config-dbus], [Build D-BUS API support (default: no)]), [CONFIG_DBUS_API=$enableval], [CONFIG_DBUS_API=no])
  AC_ARG_ENABLE(config-hal,     AS_HELP_STRING([--disable-config-hal], [Build HAL support (default: auto)]), [CONFIG_HAL=$enableval], [CONFIG_HAL=auto])
  AC_ARG_ENABLE(xfree86-utils,     AS_HELP_STRING([--enable-xfree86-utils], [Build xfree86 DDX utilities (default: enabled)]), [XF86UTILS=$enableval], [XF86UTILS=yes])
-@@ -760,6 +761,26 @@
+@@ -760,6 +761,26 @@ LIBXTST="xtst >= 1.0.99.2"
  LIBPCIACCESS="pciaccess >= 0.8.0"
  LIBGLIB="glib-2.0 >= 2.16"
  LIBSELINUX="libselinux >= 2.0.86"
@@ -603,7 +603,7 @@ Index: xorg-server/configure.ac
  
  dnl HAVE_DBUS is true if we actually have the D-Bus library, whereas
  dnl CONFIG_DBUS_API is true if we want to enable the D-Bus config
-@@ -793,13 +814,11 @@
+@@ -793,13 +814,11 @@ if test "x$CONFIG_HAL" = xyes; then
  	fi
  
  	AC_DEFINE(CONFIG_HAL, 1, [Use the HAL hotplug API])
@@ -619,9 +619,9 @@ Index: xorg-server/configure.ac
  AM_CONDITIONAL(CONFIG_NEED_DBUS, [test "x$CONFIG_NEED_DBUS" = xyes])
 Index: xorg-server/hw/kdrive/src/kinput.c
 ===================================================================
---- xorg-server.orig/hw/kdrive/src/kinput.c	2010-03-30 13:55:48.000000000 +0300
-+++ xorg-server/hw/kdrive/src/kinput.c	2010-03-30 13:55:51.000000000 +0300
-@@ -2281,6 +2281,14 @@
+--- xorg-server.orig/hw/kdrive/src/kinput.c
++++ xorg-server/hw/kdrive/src/kinput.c
+@@ -2281,6 +2281,14 @@ NewInputDeviceRequest(InputOption *optio
              return BadValue;
          }
  #endif
@@ -638,9 +638,9 @@ Index: xorg-server/hw/kdrive/src/kinput.c
      if (!ki && !pi) {
 Index: xorg-server/hw/xfree86/common/xf86Config.c
 ===================================================================
---- xorg-server.orig/hw/xfree86/common/xf86Config.c	2010-03-30 13:55:48.000000000 +0300
-+++ xorg-server/hw/xfree86/common/xf86Config.c	2010-03-30 13:55:51.000000000 +0300
-@@ -1461,12 +1461,19 @@
+--- xorg-server.orig/hw/xfree86/common/xf86Config.c
++++ xorg-server/hw/xfree86/common/xf86Config.c
+@@ -1461,12 +1461,19 @@ checkCoreInputDevices(serverLayoutPtr se
      }
  
      if (xf86Info.allowEmptyInput && !(foundPointer && foundKeyboard)) {
@@ -666,9 +666,9 @@ Index: xorg-server/hw/xfree86/common/xf86Config.c
      }
 Index: xorg-server/hw/xfree86/common/xf86Globals.c
 ===================================================================
---- xorg-server.orig/hw/xfree86/common/xf86Globals.c	2010-03-30 13:55:47.000000000 +0300
-+++ xorg-server/hw/xfree86/common/xf86Globals.c	2010-03-30 13:55:51.000000000 +0300
-@@ -132,7 +132,7 @@
+--- xorg-server.orig/hw/xfree86/common/xf86Globals.c
++++ xorg-server/hw/xfree86/common/xf86Globals.c
+@@ -132,7 +132,7 @@ xf86InfoRec xf86Info = {
      .kbdCustomKeycodes          = FALSE,
      .disableRandR               = FALSE,
      .randRFrom                  = X_DEFAULT,
@@ -679,9 +679,9 @@ Index: xorg-server/hw/xfree86/common/xf86Globals.c
      .autoEnableDevices          = TRUE
 Index: xorg-server/hw/xfree86/common/xf86Xinput.c
 ===================================================================
---- xorg-server.orig/hw/xfree86/common/xf86Xinput.c	2010-03-30 13:55:48.000000000 +0300
-+++ xorg-server/hw/xfree86/common/xf86Xinput.c	2010-03-30 13:55:51.000000000 +0300
-@@ -788,9 +788,9 @@
+--- xorg-server.orig/hw/xfree86/common/xf86Xinput.c
++++ xorg-server/hw/xfree86/common/xf86Xinput.c
+@@ -788,9 +788,9 @@ NewInputDeviceRequest (InputOption *opti
              }
          }
  
@@ -695,8 +695,8 @@ Index: xorg-server/hw/xfree86/common/xf86Xinput.c
                  rval = BadMatch;
 Index: xorg-server/include/dix-config.h.in
 ===================================================================
---- xorg-server.orig/include/dix-config.h.in	2010-03-30 13:55:48.000000000 +0300
-+++ xorg-server/include/dix-config.h.in	2010-03-30 13:55:51.000000000 +0300
+--- xorg-server.orig/include/dix-config.h.in
++++ xorg-server/include/dix-config.h.in
 @@ -393,6 +393,9 @@
  /* Support D-Bus */
  #undef HAVE_DBUS
@@ -709,9 +709,9 @@ Index: xorg-server/include/dix-config.h.in
  
 Index: xorg-server/dix/main.c
 ===================================================================
---- xorg-server.orig/dix/main.c	2010-03-30 13:22:30.000000000 +0300
-+++ xorg-server/dix/main.c	2010-03-30 13:55:51.000000000 +0300
-@@ -168,7 +168,6 @@
+--- xorg-server.orig/dix/main.c
++++ xorg-server/dix/main.c
+@@ -166,7 +166,6 @@ int main(int argc, char *argv[], char *e
  	InitBlockAndWakeupHandlers();
  	/* Perform any operating system dependent initializations you'd like */
  	OsInit();
@@ -719,7 +719,7 @@ Index: xorg-server/dix/main.c
  	if(serverGeneration == 1)
  	{
  	    CreateWellKnownSockets();
-@@ -256,6 +255,7 @@
+@@ -254,6 +253,7 @@ int main(int argc, char *argv[], char *e
          InitCoreDevices();
  	InitInput(argc, argv);
  	InitAndStartDevices();

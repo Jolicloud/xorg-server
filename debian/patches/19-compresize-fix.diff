@@ -18,11 +18,11 @@ misapplied - fixup
  include/window.h       |   11 ++++
  6 files changed, 77 insertions(+), 91 deletions(-)
 
-diff --git a/composite/compalloc.c b/composite/compalloc.c
-index 73adc72..8a6beb9 100644
---- a/composite/compalloc.c
-+++ b/composite/compalloc.c
-@@ -143,6 +143,7 @@ compRedirectWindow (ClientPtr pClient, WindowPtr pWin, int update)
+Index: xorg-server/composite/compalloc.c
+===================================================================
+--- xorg-server.orig/composite/compalloc.c
++++ xorg-server/composite/compalloc.c
+@@ -143,6 +143,7 @@ compRedirectWindow (ClientPtr pClient, W
  	cw->oldy = COMP_ORIGIN_INVALID;
  	cw->damageRegistered = FALSE;
  	cw->damaged = FALSE;
@@ -30,11 +30,11 @@ index 73adc72..8a6beb9 100644
  	dixSetPrivate(&pWin->devPrivates, CompWindowPrivateKey, cw);
      }
      ccw->next = cw->clients;
-diff --git a/composite/compinit.c b/composite/compinit.c
-index e8b563d..2ee9332 100644
---- a/composite/compinit.c
-+++ b/composite/compinit.c
-@@ -69,6 +69,7 @@ compCloseScreen (int index, ScreenPtr pScreen)
+Index: xorg-server/composite/compinit.c
+===================================================================
+--- xorg-server.orig/composite/compinit.c
++++ xorg-server/composite/compinit.c
+@@ -69,6 +69,7 @@ compCloseScreen (int index, ScreenPtr pS
      pScreen->InstallColormap = cs->InstallColormap;
      pScreen->ChangeWindowAttributes = cs->ChangeWindowAttributes;
      pScreen->ReparentWindow = cs->ReparentWindow;
@@ -50,10 +50,10 @@ index e8b563d..2ee9332 100644
 +    RegisterCompositeConfigNotifyProc(compConfigNotify);
      return TRUE;
  }
-diff --git a/composite/compint.h b/composite/compint.h
-index 845a196..a959ad5 100644
---- a/composite/compint.h
-+++ b/composite/compint.h
+Index: xorg-server/composite/compint.h
+===================================================================
+--- xorg-server.orig/composite/compint.h
++++ xorg-server/composite/compint.h
 @@ -126,14 +126,11 @@ typedef struct _CompScreen {
      RealizeWindowProcPtr	RealizeWindow;
      UnrealizeWindowProcPtr	UnrealizeWindow;
@@ -80,11 +80,11 @@ index 845a196..a959ad5 100644
 +		 int bw, WindowPtr pSib);
 +
  #endif /* _COMPINT_H_ */
-diff --git a/composite/compwindow.c b/composite/compwindow.c
-index 2f5a717..550df39 100644
---- a/composite/compwindow.c
-+++ b/composite/compwindow.c
-@@ -334,37 +334,9 @@ compImplicitRedirect (WindowPtr pWin, WindowPtr pParent)
+Index: xorg-server/composite/compwindow.c
+===================================================================
+--- xorg-server.orig/composite/compwindow.c
++++ xorg-server/composite/compwindow.c
+@@ -334,37 +334,9 @@ compImplicitRedirect (WindowPtr pWin, Wi
      return FALSE;
  }
  
@@ -123,7 +123,7 @@ index 2f5a717..550df39 100644
      if (pWin->redirectDraw != RedirectDrawNone)
      {
  	CompWindowPtr	cw = GetCompWindow (pWin);
-@@ -374,7 +346,19 @@ compMoveWindow (WindowPtr pWin, int x, int y, WindowPtr pSib, VTKind kind)
+@@ -374,7 +346,19 @@ compMoveWindow (WindowPtr pWin, int x, i
  	    cw->pOldPixmap = NullPixmap;
  	}
      }
@@ -143,7 +143,7 @@ index 2f5a717..550df39 100644
      compCheckTree (pScreen);
  }
  
-@@ -385,37 +369,12 @@ compResizeWindow (WindowPtr pWin, int x, int y,
+@@ -385,37 +369,12 @@ compResizeWindow (WindowPtr pWin, int x,
      ScreenPtr		pScreen = pWin->drawable.pScreen;
      CompScreenPtr	cs = GetCompScreen (pScreen);
  
@@ -183,7 +183,7 @@ index 2f5a717..550df39 100644
      compCheckTree (pWin->drawable.pScreen);
  }
  
-@@ -425,38 +384,12 @@ compChangeBorderWidth (WindowPtr pWin, unsigned int bw)
+@@ -425,38 +384,12 @@ compChangeBorderWidth (WindowPtr pWin, u
      ScreenPtr		pScreen = pWin->drawable.pScreen;
      CompScreenPtr	cs = GetCompScreen (pScreen);
  
@@ -251,11 +251,11 @@ index 2f5a717..550df39 100644
 +	return BadAlloc;
 +    return Success;
 +}
-diff --git a/dix/window.c b/dix/window.c
-index e191f09..e4c850f 100644
---- a/dix/window.c
-+++ b/dix/window.c
-@@ -2104,6 +2104,13 @@ ReflectStackChange(
+Index: xorg-server/dix/window.c
+===================================================================
+--- xorg-server.orig/dix/window.c
++++ xorg-server/dix/window.c
+@@ -2102,6 +2102,13 @@ ReflectStackChange(
  	WindowsRestructured ();
  }
  
@@ -269,7 +269,7 @@ index e191f09..e4c850f 100644
  /*****
   * ConfigureWindow
   *****/
-@@ -2220,7 +2227,6 @@ ConfigureWindow(WindowPtr pWin, Mask mask, XID *vlist, ClientPtr client)
+@@ -2218,7 +2225,6 @@ ConfigureWindow(WindowPtr pWin, Mask mas
      else
  	pSib = pWin->nextSib;
  
@@ -277,7 +277,7 @@ index e191f09..e4c850f 100644
      if ((!pWin->overrideRedirect) && 
  	(RedirectSend(pParent)
  	))
-@@ -2305,6 +2311,16 @@ ConfigureWindow(WindowPtr pWin, Mask mask, XID *vlist, ClientPtr client)
+@@ -2303,6 +2309,16 @@ ConfigureWindow(WindowPtr pWin, Mask mas
      return(Success);
  
  ActuallyDoSomething:
@@ -294,11 +294,11 @@ index e191f09..e4c850f 100644
      if (SubStrSend(pWin, pParent))
      {
  	memset(&event, 0, sizeof(xEvent));
-diff --git a/include/window.h b/include/window.h
-index 6fb2f8c..ea2edab 100644
---- a/include/window.h
-+++ b/include/window.h
-@@ -266,4 +266,15 @@ extern _X_EXPORT void DisableMapUnmapEvents(
+Index: xorg-server/include/window.h
+===================================================================
+--- xorg-server.orig/include/window.h
++++ xorg-server/include/window.h
+@@ -266,4 +266,15 @@ extern _X_EXPORT void DisableMapUnmapEve
  extern _X_EXPORT void EnableMapUnmapEvents(
      WindowPtr /* pWin */ );
  
@@ -314,6 +314,3 @@ index 6fb2f8c..ea2edab 100644
 +_X_EXPORT void RegisterCompositeConfigNotifyProc(compositeConfigNotifyProcPtr proc);
 +
  #endif /* WINDOW_H */
--- 
-1.7.1
-

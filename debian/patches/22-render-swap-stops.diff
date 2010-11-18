@@ -16,11 +16,11 @@ Reviewed-by: Soren Sandmann <sandmann@daimi.au.dk>
  render/render.c |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/render/render.c b/render/render.c
-index 00241f9..85a4392 100644
---- a/render/render.c
-+++ b/render/render.c
-@@ -2552,8 +2552,8 @@ static void swapStops(void *stuff, int num)
+Index: xorg-server/render/render.c
+===================================================================
+--- xorg-server.orig/render/render.c
++++ xorg-server/render/render.c
+@@ -2565,8 +2565,8 @@ static void swapStops(void *stuff, int n
      }
      colors = (CARD16 *)(stops);
      for (i = 0; i < 4*num; ++i) {
@@ -31,11 +31,3 @@ index 00241f9..85a4392 100644
      }
  }
  
--- 
-1.7.1
-
-_______________________________________________
-xorg-devel@lists.x.org: X.Org development
-Archives: http://lists.x.org/archives/xorg-devel
-Info: http://lists.x.org/mailman/listinfo/xorg-devel
-
