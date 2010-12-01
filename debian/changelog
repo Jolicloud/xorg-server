@@ -3,6 +3,9 @@ xorg-server (2:1.7.7-10) UNRELEASED; urgency=low
   * render: Fix byteswapping of gradient stops
   * Cherry-pick from upstream:
     - Xi: reset the known properties at each server generation
+    - xfree86: apply gamma settings on EnterVT.
+    - xfree86: store the screen's gamma information on init.
+    - fix screen number checks
   * Refresh patches.
 
  -- Julien Cristau <jcristau@debian.org>  Thu, 18 Nov 2010 16:46:32 +0100

@@ -1,3 +1,61 @@
+commit 6f7f3e2b799984e1b8aade89726dc226fc0b89ac
+Author: Cyril Brulebois <kibi@debian.org>
+Date:   Wed Dec 1 14:12:55 2010 +0100
+
+    Fix screen number checks.
+    
+    screenInfo.numScreens is not a valid screen number, they go from 0 to
+    numScreens - 1.
+    
+    Signed-off-by: Cyril Brulebois <kibi@debian.org>
+    Reviewed-by: Alex Deucher <alexdeucher@gmail.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 279ef1ffd787dba2f0d5056849b9cb15d36aa3eb)
+
+commit bcab9213fbafa3091d2f5c831bb668cacaec5f8b
+Author: Julien Cristau <jcristau@debian.org>
+Date:   Tue Nov 30 17:23:10 2010 +0100
+
+    DGA: fix screen number check
+    
+    screenInfo.numScreens is not a valid screen number, they go from 0 to
+    numScreens - 1.
+    
+    Signed-off-by: Julien Cristau <jcristau@debian.org>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 8684543021b9b1aa165b1bc69bc58685cb5942c1)
+
+commit f86265529b1506a3946d6e3d6fed77a6702108b1
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Nov 15 11:25:14 2010 +1000
+
+    xfree86: store the screen's gamma information on init.
+    
+    This fixes a gamma issue on vt switch observed with KDM. VT switching away
+    and back would result in a black screen. Avoid this by storing the current
+    gamma information on init.
+    
+    https://bugzilla.redhat.com/show_bug.cgi?id=533217
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 566d09a5cd6452ee2e05e23d2205e7c3aa31f0da)
+
+commit 333a6355917c552132e1dd3a2aa066c5b7e70566
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Mon Nov 15 11:25:12 2010 +1000
+
+    xfree86: apply gamma settings on EnterVT.
+    
+    When entering the VT, re-apply the saved gamma settings for each screen.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit c050aa2f5fa6a7ff8ce4f91def14ca44f799f067)
+
 commit c9bca39848add875a76cf2434aabbadb97ddd721
 Author: Peter Hutterer <peter.hutterer@who-t.net>
 Date:   Wed Jun 9 17:10:57 2010 +1000
