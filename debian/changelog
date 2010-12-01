@@ -1,4 +1,4 @@
-xorg-server (2:1.7.7-10) UNRELEASED; urgency=low
+xorg-server (2:1.7.7-10) unstable; urgency=low
 
   * render: Fix byteswapping of gradient stops
   * Cherry-pick from upstream:
@@ -8,7 +8,7 @@ xorg-server (2:1.7.7-10) UNRELEASED; urgency=low
     - fix screen number checks
   * Refresh patches.
 
- -- Julien Cristau <jcristau@debian.org>  Thu, 18 Nov 2010 16:46:32 +0100
+ -- Julien Cristau <jcristau@debian.org>  Thu, 02 Dec 2010 00:39:50 +0100
 
 xorg-server (2:1.7.7-9) unstable; urgency=low
 
