@@ -1,3 +1,17 @@
+xorg-server (2:1.7.7-11) UNRELEASED; urgency=low
+
+  * Merge server-1.7-branch from upstream:
+    - xfree86/modes: Take rotation into account when checking mode size
+    - randr: check for virtual size limits before set crtc
+    - EXA: Fix crash with fill using 1x1 tile of depth < 8 (bug #24703).
+    - Add EDID quirk for HP Compaq nc8430.
+    - x86emu: Fix more mis-decoding of the data prefix
+    - x86emu: fix jump_near_IMM to handle DATA: flag correctly.
+    - Add and use SERVER_SYNC_*_VERSION
+    - render: Fix byteswapping of gradient stops
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 12 Jan 2011 01:09:51 +0100
+
 xorg-server (2:1.7.7-10) unstable; urgency=low
 
   * render: Fix byteswapping of gradient stops

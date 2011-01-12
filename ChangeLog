@@ -1,3 +1,154 @@
+commit 2fd67c34549f1703e8ca522f92be518b18f90e81
+Author: Ville Syrjälä <ville.syrjala@nokia.com>
+Date:   Thu Dec 16 18:22:13 2010 +0200
+
+    xfree86/modes: Take rotation into account when checking mode size
+    
+    Assume that a mode can be used in either landscape or portrait
+    orientation. I suppose the correct thing to do would be to
+    collect all the supported rotations from the CRTCs that can be used
+    with a specific output, but that information doesn't seem to be
+    readily available when these checks are done. So just assume that
+    either orientation is fine.
+    
+    Signed-off-by: Ville Syrjälä <ville.syrjala@nokia.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    (cherry picked from commit 2e781457d43ec4bf0d633257ac6852cde3b00541)
+    (cherry picked from commit aec278eb65fe1ca98ab551a8c3873a7195bad540)
+
+commit 6a6d907e77777057cadbd80572119c09732385cd
+Author: Tiago Vignatti <tiago.vignatti@nokia.com>
+Date:   Fri Dec 17 16:09:35 2010 +0200
+
+    randr: check for virtual size limits before set crtc
+    
+    Return a error if the screen is configured to an invalid size.
+    
+    Signed-off-by: Tiago Vignatti <tiago.vignatti@nokia.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit d1107918d4626268803b54033a07405122278e7f)
+
+commit 5b979a13df331ad28ce7f1c90d6e059f6fd4eedb
+Author: Michel Dänzer <daenzer@vmware.com>
+Date:   Wed Dec 22 11:45:36 2010 +0100
+
+    EXA: Fix crash with fill using 1x1 tile of depth < 8 (bug #24703).
+    
+    Fixes http://bugs.freedesktop.org/show_bug.cgi?id=24703 .
+    
+    Signed-off-by: Michel Dänzer <daenzer@vmware.com>
+    Reviewed-by: Dave Airlie <airlied@redhat.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit e06fa804009798ea95efa8babaabb0228dfdfe65)
+
+commit 561afd799fc4060111b650657f3a0a01cce484b3
+Author: Jörn Horstmann <launchpad@planetxml.de>
+Date:   Mon Dec 6 11:24:02 2010 +1100
+
+    Add EDID quirk for HP Compaq nc8430.
+    
+    Like some other LPL panels, this one reports the vertical size in cm rather
+    than mm.
+    Patch taken from Launchpad bug #380009 <https://launchpad.net/bugs/380009>
+    
+    X.Org Bug 28414 <https://bugs.freedesktop.org/show_bug.cgi?id=28414>
+    
+    Signed-off-by: Christopher James Halse Rogers <christopher.halse.rogers@canonical.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 4b88c7be8de4149fe3d166bf115775f9e81a1373)
+
+commit cd82012d5da9a88537e7079f8204853a886ab4e5
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Fri Dec 10 14:24:02 2010 -0500
+
+    x86emu: Fix more mis-decoding of the data prefix
+    
+    cc2c73ddcb4370a7c3ad439cda4da825156c26c9's three-cent titanium tax
+    doesn't go too far enough.  Fix the rest of the call and jmp
+    instructions to handle the data prefix correctly.
+    
+    Reference: Intel 64 and IA-32 Architectures Software Developer's Manual
+    Volume 2A: Instruction Set Reference, A-M
+    
+    http://www.intel.com/Assets/PDF/manual/253666.pdf
+    
+    Reviewed-by: Julien Cristau <jcristau@debian.org>
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    (cherry picked from commit bb18f277156c08be028a6e12d8987fb1593e9168)
+
+commit 2194c381c8a0b4e1a163f9b0f6abe92093f531fa
+Author: Luc Verhaegen <libv@skynet.be>
+Date:   Sun Oct 24 23:57:06 2010 +0200
+
+    x86emu: fix jump_near_IMM to handle DATA: flag correctly.
+    
+    Fixes: https://bugs.freedesktop.org/show_bug.cgi?id=24348
+    
+    Before (data flag ignored -> broken):
+    66                  DATA:
+    e944f1              JMP       1ff6
+    
+    After (fixed):
+    66                  DATA:
+    e944f1ffff          JMP       00001ff8
+    
+    This subtle difference in the length of decoded instruction meant
+    that the VBE call jumped to the routine setting AX=0x14F (VBE Failed)
+    instead of the routine that set AX=0x4F (VBE success).
+    
+    The ability to run the same code in vm86 significantly aided the
+    debugging of this issue. Those X.org developers who would like to drop
+    vm86 better take special care towards _all_ vesa bugs, as those will
+    expose further issues.
+    
+    Patch applies easily to even xserver 1.4.2.
+    
+    Signed-off-by: Luc Verhaegen <libv@skynet.be>
+    Tested-by: Luc Verhaegen <libv@skynet.be>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit cc2c73ddcb4370a7c3ad439cda4da825156c26c9)
+
+commit c038d008e4004914dc5ad58ba73d51baf0cd91ac
+Author: James Jones <jajones@nvidia.com>
+Date:   Mon Dec 6 13:36:14 2010 -0800
+
+    Add and use SERVER_SYNC_*_VERSION
+    
+    Most extensions have a version defined
+    in the protocol headers, and also in the
+    server's protocol-versions.h.  The latter
+    defines which version the server advertises
+    support for.  Sync wasn't included in
+    protocol-versions.h, and was advertising
+    support for whatever was in the protocol
+    headers the server was built against.
+    
+    Signed-off-by: James Jones <jajones@nvidia.com>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 27593eea7efcbed8de0c6e8233cbd1a1b8a50459)
+
+commit 472163b7f3a5e7aa7f40fa81b1facc71dd3529bc
+Author: Andrea Canciani <ranma42@gmail.com>
+Date:   Tue Nov 2 20:10:32 2010 +0100
+
+    render: Fix byteswapping of gradient stops
+    
+    The function swapStops repeatedly swaps the color components as
+    CARD16, but incorrectly steps over them as if they were CARD32.
+    
+    This causes half of the stops not to be swapped at all and some
+    unrelated data be swapped instead.
+    
+    Signed-off-by: Andrea Canciani <ranma42@gmail.com>
+    Reviewed-by: Soren Sandmann <sandmann@daimi.au.dk>
+    Reviewed-by: Julien Cristau <jcristau@debian.org>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit dab064fa5e0b1f5c67222562ad5367005832cba1)
+
 commit 6f7f3e2b799984e1b8aade89726dc226fc0b89ac
 Author: Cyril Brulebois <kibi@debian.org>
 Date:   Wed Dec 1 14:12:55 2010 +0100
