@@ -1,0 +1,37 @@
+Stop searching for XF86Config files
+
+xorg.conf has been used since the X11R6.7 release in April 2004.
+6 years has been a generous transition period for users to
+"mv XF86Config xorg.conf" and for distros to update their
+configuration tools and packages.
+
+Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+Reviewed-by: James Cloos <cloos@jhcloos.com>
+Signed-off-by: Keith Packard <keithp@keithp.com>
+(cherry picked from commit d163266692235261e1e0cfa6b900f54e6ec63de5)
+
+Signed-off-by: Cyril Brulebois <kibi@debian.org>
+
+--- a/hw/xfree86/parser/scan.c
++++ b/hw/xfree86/parser/scan.c
+@@ -626,7 +626,6 @@ xf86pathIsSafe(const char *path)
+ #ifndef XCONFENV
+ #define XCONFENV	"XORGCONFIG"
+ #endif
+-#define XFREE86CFGFILE "XF86Config"
+ #ifndef XF86_VERSION_MAJOR
+ #ifdef XVERSION
+ #if XVERSION > 40000000
+@@ -994,11 +993,8 @@ xf86openConfigFile(const char *path, const char *cmdline, const char *projroot)
+ 	if (!projroot || !projroot[0])
+ 		projroot = PROJECTROOT;
+ 
+-	/* Search for a config file or a fallback */
++	/* Search for a config file */
+ 	configPath = OpenConfigFile(path, cmdline, projroot, XCONFIGFILE);
+-	if (!configPath)
+-		configPath = OpenConfigFile(path, cmdline, projroot,
+-					    XFREE86CFGFILE);
+ 	return configPath;
+ }
+ 

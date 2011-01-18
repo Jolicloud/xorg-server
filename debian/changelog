@@ -2,6 +2,12 @@ xorg-server (2:1.7.7-12) UNRELEASED; urgency=low
 
   * Cherry-pick this to fix crashes with MCE remotes (Closes: #609750):
     - mi: handle DGA subtypes when determining the master device.
+  * Add 22-stop-searching-for-xf86config-files, cherry-picking the
+    upstream commit below (which we can't do directly since it depends on
+    a patch kept in the quilt series: 08-config-xorg-conf-d.diff), so that
+    XF86Config-4 is no longer considered (Closes: #610453). Thanks,
+    Bernhard R. Link!
+    - Stop searching for XF86Config files
 
  -- Cyril Brulebois <kibi@debian.org>  Tue, 18 Jan 2011 19:42:09 +0100
 
