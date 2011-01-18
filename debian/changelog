@@ -1,3 +1,10 @@
+xorg-server (2:1.7.7-12) UNRELEASED; urgency=low
+
+  * Cherry-pick this to fix crashes with MCE remotes (Closes: #609750):
+    - mi: handle DGA subtypes when determining the master device.
+
+ -- Cyril Brulebois <kibi@debian.org>  Tue, 18 Jan 2011 19:42:09 +0100
+
 xorg-server (2:1.7.7-11) unstable; urgency=low
 
   * Merge server-1.7-branch from upstream:
