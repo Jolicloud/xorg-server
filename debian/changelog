@@ -11,6 +11,10 @@ xorg-server (2:1.7.7-12) UNRELEASED; urgency=low
   * Improve bug script:
     - Stop reporting about roster and checksum for config file and server
       symlink, they are no longer used.
+    - Replace printf with echo everywhere, it's slightly more readable and
+      all lines are newline-terminated anyway.
+    - Also use a “pecho” (pretty echo) function to underline some strings,
+      making the output slightly more readable.
 
  -- Cyril Brulebois <kibi@debian.org>  Tue, 18 Jan 2011 19:42:09 +0100
 
