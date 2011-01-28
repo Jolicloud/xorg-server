@@ -17,6 +17,9 @@ xorg-server (2:1.7.7-12) UNRELEASED; urgency=low
       making the output slightly more readable.
     - Fix listing xorg.conf.d's contents. Previously, that was only done
       if xorg.conf existed.
+    - Check for local libraries by running ldd on the server.
+    - Warn about possible obsolete libraries by checking for /usr/X11R6's
+      existence.
 
  -- Cyril Brulebois <kibi@debian.org>  Tue, 18 Jan 2011 19:42:09 +0100
 
