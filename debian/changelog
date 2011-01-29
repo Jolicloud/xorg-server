@@ -1,4 +1,4 @@
-xorg-server (2:1.7.7-12) UNRELEASED; urgency=low
+xorg-server (2:1.7.7-12) unstable; urgency=low
 
   * Cherry-pick this to fix crashes with MCE remotes (Closes: #609750):
     - mi: handle DGA subtypes when determining the master device.
@@ -22,7 +22,7 @@ xorg-server (2:1.7.7-12) UNRELEASED; urgency=low
       still exist in some cases, and be referenced in /etc/ld.so.conf, so
       using ldd is sufficient to find out, see #546836 for an example).
 
- -- Cyril Brulebois <kibi@debian.org>  Tue, 18 Jan 2011 19:42:09 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Sat, 29 Jan 2011 14:29:50 +0100
 
 xorg-server (2:1.7.7-11) unstable; urgency=low
 
