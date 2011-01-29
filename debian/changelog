@@ -8,6 +8,9 @@ xorg-server (2:1.7.7-12) UNRELEASED; urgency=low
     XF86Config-4 is no longer considered (Closes: #610453). Thanks,
     Bernhard R. Link!
     - Stop searching for XF86Config files
+  * Improve bug script:
+    - Stop reporting about roster and checksum for config file and server
+      symlink, they are no longer used.
 
  -- Cyril Brulebois <kibi@debian.org>  Tue, 18 Jan 2011 19:42:09 +0100
 
