@@ -1,3 +1,9 @@
+xorg-server (2:1.7.7-13) UNRELEASED; urgency=low
+
+  * bug script: Report KMS configuration files and their contents.
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 09 Feb 2011 10:24:10 +0100
+
 xorg-server (2:1.7.7-12) unstable; urgency=low
 
   * Cherry-pick this to fix crashes with MCE remotes (Closes: #609750):
