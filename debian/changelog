@@ -1,3 +1,67 @@
+xorg-server (2:1.7.6.901-0jolicloud1) robby-1.1.1; urgency=low
+
+  [ Jeremy Huddleston ]
+  * XQuartz: GLX: Fix Availability for Tiger ppc workaround
+  * XQuartz: Minor cleanup
+  * XQuartz: xpbproxy: Cleanup xpbproxy threading
+  * XQuartz: pbproxy: Make standalone xpbproxy respect the launchd
+    prefix
+  * XQuartz: Constrain the pointer to the updated display bounds on
+    display reconfigure.
+
+  [ Peter Harris ]
+  * Fix crash when all glyphs of a given depth are freed, but not all
+    glyphsets
+
+  [ Tomas Carnecky ]
+  * Fix typos in the swap functions
+
+  [ Roland Scheidegger ]
+  * hw/xfree86: move reference counting out of the UseHWCursor[ARGB]
+    functions
+
+  [ Jeremy Huddleston ]
+  * XQuartz: Workaround weird key data reported on some layouts
+  * XQuartz: Re-query dixScreenOrigins as the value could've changed.
+
+  [ Peter Hutterer ]
+  * dix: EventToCore needs to copy the root window too.
+
+  [ Pierre-Loup A. Griffais ]
+  * Don't keep a pointer to a possibly freed cursor when changing
+    screens, preventing a crash in xf86CursorEnableDisableFBAccess()
+    trying to restore it.
+
+  [ Paulo Ricardo Zanoni ]
+  * dix: be more verbose when we run out of opcodes
+
+  [ Jeremy Huddleston ]
+  * XKB: Fix garbage initialization
+
+  [ Peter Hutterer ]
+  * configure: Always define XINPUT.
+
+  [ Mikhail Gusarov ]
+  * kdrive: Bump evdev maxKeycode
+
+  [ Michel Dänzer ]
+  * Xext: Fix cursor reference counting hazard.
+
+  [ Peter Hutterer ]
+  * dix: if owner-events is true for passive grabs, add the window mask
+    (#25400)
+
+  [ Tiago Vignatti ]
+  * xfree86: die gracefully in the vga arbiter if AddScreen fails
+
+  [ Peter Hutterer ]
+  * xserver 1.7.6.901
+
+  [ Adam McDaniel ]
+  * Removed obsolete patches from series already merged upstream
+
+ -- Adam McDaniel <adam@jolicloud.org>  Wed, 09 Feb 2011 11:28:34 -0700
+
 xorg-server (2:1.7.6-2ubuntu7.5) lucid-proposed; urgency=low
 
   * debian/patches/203_fix-xtest-lp607071.patch: fix segfault with certain
