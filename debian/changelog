@@ -1,6 +1,8 @@
 xorg-server (2:1.7.7-13) UNRELEASED; urgency=low
 
   * bug script: Report KMS configuration files and their contents.
+  * bug script: Keep only one lspci call (with proper filtering), which
+    makes PCI IDs come back.
 
  -- Cyril Brulebois <kibi@debian.org>  Wed, 09 Feb 2011 10:24:10 +0100
 
