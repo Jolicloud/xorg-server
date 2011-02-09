@@ -1,3 +1,11 @@
+xorg-server (2:1.7.6.901-0jolicloud2) robby-1.1.1; urgency=low
+
+  [ Julien Cristau ]
+  * Make xserver-xorg-core provide ABI-versioned virtual packages for
+    drivers to depend on.
+
+ -- Adam McDaniel <adam@jolicloud.org>  Wed, 09 Feb 2011 12:09:09 -0700
+
 xorg-server (2:1.7.6.901-0jolicloud1) robby-1.1.1; urgency=low
 
   [ Jeremy Huddleston ]
