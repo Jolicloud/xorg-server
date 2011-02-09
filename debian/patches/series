@@ -24,9 +24,6 @@
 111_armel-drv-fallbacks.patch
 112_xaa-fbcomposite-fix-negative-size.patch
 113_quell_nouveau_aiglx.patch
-115_xext_fix_cursor_ref_counting.patch
-116_fix_typos_in_swap_functions.patch
-118_xkb_fix_garbage_init.patch
 121_only_switch_vt_when_active.diff
 122_xext_fix_card32_overflow_in_xauth.patch
 123_exa_sys_ptr_nullpointer_check.patch
@@ -53,5 +50,4 @@
 199_xfvb-help-typo.patch
 200_randr-null.patch
 201_dixFreePrivates.patch
-202_trappedMouseCursor.patch
 203_fix-xtest-lp607071.patch
