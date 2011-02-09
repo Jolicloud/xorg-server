@@ -1,0 +1,13 @@
+https://bugs.launchpad.net/ubuntu/+source/xserver-xorg-video-intel/+bug/569879/comments/16
+Index: xorg-server-1.7.6/dix/privates.c
+===================================================================
+--- xorg-server-1.7.6.orig/dix/privates.c	2010-07-14 22:06:44.000000000 -0400
++++ xorg-server-1.7.6/dix/privates.c	2010-07-14 22:07:53.000000000 -0400
+@@ -303,6 +303,7 @@
+     /* reset private descriptors */
+     for (i = 1; i < nextPriv; i++) {
+ 	*items[i].key = 0;
++	items[i].size = 0;
+ 	DeleteCallbackList(&items[i].initfuncs);
+ 	DeleteCallbackList(&items[i].deletefuncs);
+     }

@@ -38,7 +38,7 @@ endif
 
 ifeq ($(DEB_HOST_ARCH_OS), linux)
 	build_xfbdev = --enable-xfbdev
-	selinux = --enable-xselinux
+	selinux = --disable-xselinux
 else
 	build_xfbdev = --disable-xfbdev
 	selinux = --disable-xselinux
@@ -69,7 +69,7 @@ INSTALL=/usr/bin/install
 
 VENDOR = $(shell lsb_release -i -s)
 
-BUILDER=$(shell dpkg-parsechangelog | awk -F': ' '/^Maintainer: / {print $$2}')
+BUILDER=For technical support please see http://www.ubuntu.com/support
 
 # disable-static is so we don't get libfoo.a for modules.  now if only we could
 # kill the .las.
@@ -80,6 +80,7 @@ confflags += \
 	     --disable-debug \
 	     $(config_tests) \
 	     --with-int10=x86emu \
+	     --with-extra-module-dir="/usr/lib/xorg/extra-modules" \
 	     --with-os-vendor="$(VENDOR)" \
 	     --with-builderstring="$(SOURCE_NAME) $(SOURCE_VERSION) ($(BUILDER))" \
 	     --with-xkb-path=/usr/share/X11/xkb \
@@ -89,7 +90,7 @@ confflags += \
 	     --disable-null-root-cursor \
 	     --enable-mitshm \
 	     --enable-xres \
-	     --disable-xcsecurity \
+	     --enable-xcsecurity \
 	     --disable-xcalibrate \
 	     --disable-tslib \
 	     --disable-multibuffer \
@@ -274,6 +275,7 @@ binary-arch: build install
 	           $(CURDIR)/debian/xserver-xorg-dev/usr/share/xserver-xorg/serverminver
 	$(INSTALL) -m 755 -d debian/xserver-xorg-core/usr/share/bug/xserver-xorg-core
 	$(INSTALL) -m 755 debian/xserver-xorg-core.bug.script debian/xserver-xorg-core/usr/share/bug/xserver-xorg-core/script
+
 ifeq ($(DEB_HOST_ARCH_OS), linux)
 	install -d debian/xserver-xorg-core/lib/udev/rules.d
 	install -m 644 debian/local/64-xorg-xkb.rules debian/xserver-xorg-core/lib/udev/rules.d
