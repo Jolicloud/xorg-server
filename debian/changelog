@@ -1,4 +1,4 @@
-xorg-server (2:1.7.7-13) UNRELEASED; urgency=low
+xorg-server (2:1.7.7-13) stable; urgency=low
 
   * bug script: Report KMS configuration files and their contents.
   * bug script: Keep only one lspci call (with proper filtering), which
@@ -8,7 +8,7 @@ xorg-server (2:1.7.7-13) UNRELEASED; urgency=low
     - Revert "randr: check for virtual size limits before set crtc"
   * bug script: Report libGL-related diversions.
 
- -- Cyril Brulebois <kibi@debian.org>  Wed, 09 Feb 2011 10:24:10 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 18 Feb 2011 14:21:12 +0100
 
 xorg-server (2:1.7.7-12) unstable; urgency=low
 
