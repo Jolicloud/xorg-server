@@ -1,6 +1,7 @@
 xorg-server (2:1.9.4.901-1) UNRELEASED; urgency=low
 
   * New upstream release (1.9.5 rc1).
+  * Drop patch: 20-update-gpu-pitch.diff (merged upstream).
 
  -- Cyril Brulebois <kibi@debian.org>  Sat, 05 Mar 2011 18:42:43 +0100
 
