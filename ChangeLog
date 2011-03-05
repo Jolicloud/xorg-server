@@ -1,3 +1,201 @@
+commit 6666424a31f93e0aa1bb394c6ade7ae029f90f70
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Fri Mar 4 13:42:45 2011 -0800
+
+    1.9.4.901 (1.9.5 RC1)
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+
+commit 457728d723a7d93cd88691dd920bf42a7540616a
+Author: Julien Cristau <jcristau@debian.org>
+Date:   Sat Jul 3 19:42:26 2010 +0100
+
+    glx: make sure screen is non-negative in validGlxScreen
+    
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    Reviewed-by: Kristian Høgsberg <krh@bitplanet.net>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+    Signed-off-by: Julien Cristau <jcristau@debian.org>
+    (cherry picked from commit 3f0d3f4d97bce75c1828635c322b6560a45a037f)
+
+commit 8a18d18bb31933d8dd0fe63cd293d7ae6711abcc
+Author: Evan Broder <ebroder@mokafive.com>
+Date:   Tue Feb 1 16:09:50 2011 -0800
+
+    xfree86/modes: Be sure to only use new EDID for physical output dimensions
+    
+    The EDID processing regards physical dimensions of 0mm x 0mm as
+    invalid. Previously the old values for height and width would be
+    preserved if none of the physical dimension specifications in the new
+    EDID were considered valid.
+    
+    This will come up in particular if first a monitor is connected to an
+    output, and then a projector is connected. Since projectors generally
+    report physical dimensions of 0mm x 0mm, this would result in the
+    projector claiming to have the physical dimensions of the monitor.
+    
+    Signed-off-by: Evan Broder <ebroder@mokafive.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 12b0f7df2caa78d68b453aaa91248bb3577fd724)
+
+commit 11bf10e22cefe661f5650d49316bbd938a40094c
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Mon Feb 8 15:23:04 2010 -0500
+
+    xfree86: If the driver found modes on an output, don't add more
+    
+    Inferring modes from sync ranges is only valid if the monitor says it's
+    valid.  If the monitor says it's valid, then we'll have already added
+    those modes during EDID block parse.  If it doesn't, then we should
+    believe it.
+    
+    If there's no EDID for an output, but sync ranges from the config, we'll
+    still add default modes as normal.
+    
+    Reviewed-by: Alex Deucher <alexdeucher@gmail.com>
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    (cherry picked from commit dc498b433f36af5d2de3065e7c64cdb575385d81)
+
+commit 8dd85e585ae8d0f40f7fc3f2c6fe93555b8e0905
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Tue Mar 1 20:02:46 2011 -0800
+
+    XQuartz: pbproxy: Protect against possible collision between Cocoa and X11 Cursor types
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+    (cherry picked from commit 69a9171dbbafd6a7db702d48770d28fb54717545)
+
+commit f71436014c17f168e2c1c0fa2e8ade374a7f42ab
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Sun Feb 27 16:18:27 2011 -0800
+
+    XQuartz: Don't use deprecated CoreGraphics API on SL and Lion
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+    (cherry picked from commit 0343aed1f082baf4bfbd730c1c3582f1410b8741)
+
+commit a10323c74a98dd31bf7e14b668e96e3938b580bd
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Tue Feb 8 11:38:35 2011 -0800
+
+    XQuartz: RandR: Add RandR modes for the primary display in multi-monitor configs
+    
+    We now support using RandR to set the resolution of the primary display (and
+    place a shielding window on other displays) in multi-monitor configurations.
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+    (cherry picked from commit 8cf3348e90846f5b04236479042228fb98ac8f70)
+
+commit 3be0b136fad8aafe557cc0ce354e705f0c04245a
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Tue Feb 8 12:26:35 2011 -0800
+
+    XQuartz: RandR: Provide an alert box when entering a RandR mode for the first time.
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+    (cherry picked from commit 968652983f8e6ae6889b48e15f4098ff6ad4a15a)
+
+commit ceaa2f438d44b23a8958c42de4f666048aedabb1
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Tue Feb 8 11:37:52 2011 -0800
+
+    XQuartz: RandR: Capture the display when switching modes with RandR
+    
+    This will prevent native windows from resizing as we change resolutions.
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+    (cherry picked from commit 13578b852b7631f99cf1fd5e2e5469edc5aae369)
+
+commit 7b3b7efe78dec87c8059ea0d0985f08a97f0633d
+Author: Michel Dänzer <daenzer@vmware.com>
+Date:   Thu Feb 24 12:17:57 2011 +0100
+
+    EXA/mixed: ModifyPixmapHeader pitch fixes. (bug #33929)
+    
+    If there's a GPU copy and a non-zero devKind was passed in, set the GPU copy
+    pitch to that instead of to a possibly bogus value derived from the new width.
+    This is e.g. used by the radeon driver's drmmode_xf86crtc_resize hook, fixes
+    https://bugs.freedesktop.org/show_bug.cgi?id=33929 .
+    
+    On the other hand, the system memory copy doesn't need the pitch to be aligned
+    beyond the PixmapBytePad of the width.
+    
+    Signed-off-by: Michel Dänzer <daenzer@vmware.com>
+    Acked-by: Cyril Brulebois <kibi@debian.org>
+    Tested-by: Cyril Brulebois <kibi@debian.org>
+    Reported-by: Thierry Vignaud <thierry.vignaud@gmail.com>
+    Tested-by: Thierry Vignaud <thierry.vignaud@gmail.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 31704510f448706524b7b7085cc4ff0ada7bfe7e)
+
+commit 0e253a9c8676583a87db755d65ee9165a71fbef4
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Thu Feb 24 19:24:35 2011 -0800
+
+    XQuartz: Localization Updates
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+    (cherry picked from commit b17fc99cb9ca9ff0a3592f783a906cdcc35da748)
+
+commit 3412f4799ce83deeef59a903f7555bdfb15c6f4c
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Thu Feb 24 19:18:35 2011 -0800
+
+    XQuartz: Add LSApplicationCategoryType key to Info.plist
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+    (cherry picked from commit 59850630fefe5e4f0430d7e2e106937fdf1e7ffb)
+
+commit 8369467c20746ee91ac8be78a43dc1990b01e056
+Author: Erkki Seppälä <erkki.seppala@vincit.fi>
+Date:   Thu Feb 10 15:35:14 2011 +0200
+
+    record: avoid crash when calling RecordFlushReplyBuffer recursively
+    
+    RecordFlushReplyBuffer can call itself recursively through
+    WriteClient->CallCallbacks->_CallCallbacks->RecordFlushAllContexts
+    when the recording client's buffer cannot be completely emptied in one
+    WriteClient. When a such a recursion occurs, it will not be broken out
+    of which results in segmentation fault when the stack is exhausted.
+    
+    This patch adds a counter (a flag, really) that guards against this
+    situation, to break out of the recursion.
+    
+    One alternative to this change would be to change _CallCallbacks to
+    check the corresponding counter before the callback loop, but that
+    might affect existing behavior, which may be relied upon.
+    
+    Reviewed-by: Rami Ylimäki <rami.ylimaki@vincit.fi>
+    Signed-off-by: Erkki Seppälä <erkki.seppala@vincit.fi>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit 0801afbd7c2c644c672b37f8463f1a0cbadebd2e)
+
+commit f60f586c64502077350b7a4ed713535d6e671b07
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Thu Jan 20 23:01:03 2011 -0500
+
+    xselinux: Fix GetDrawableContext
+    
+    M_DRAWABLE_PIXMAP is the lookup mask to dixLookupDrawable, and _not_ the
+    type value in the drawable itself.
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    Reviewed-by: Eamon Walsh <ewalsh@tycho.nsa.gov>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit ac0a00a840a5d8d8374e5db2b849e5959550ca4e)
+
+commit 0a4b0de9afeab0cd47e1e297d5b5d42bfda0a5a7
+Author: Maarten Maathuis <madman2003@gmail.com>
+Date:   Sun Jan 30 14:06:15 2011 +0100
+
+    exa: Only call driver FinishAccess hook if PrepareAccess hook succeeded.
+    
+    Reviewed-by: Michel Dänzer <michel@daenzer.net>
+    Signed-off-by: Maarten Maathuis <madman2003@gmail.com>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit af87f6367ef733d1a4f3cfca4eeb92bfd84c2b6f)
+
 commit ce83d1bd5a7dee70cc1616b583fbd3ce2392f0a0
 Author: Jeremy Huddleston <jeremyhu@apple.com>
 Date:   Fri Feb 4 11:35:58 2011 -0800
