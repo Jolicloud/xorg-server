@@ -1,11 +1,11 @@
-xorg-server (2:1.9.4.901-1) UNRELEASED; urgency=low
+xorg-server (2:1.9.4.901-1) unstable; urgency=low
 
   * New upstream release (1.9.5 rc1).
   * Drop patch: 20-update-gpu-pitch.diff (merged upstream).
   * Pass --enable-xcsecurity to the main build to restore the XC-SECURITY
     extension, thanks to Stefan Fritsch's report (Closes: #599657).
 
- -- Cyril Brulebois <kibi@debian.org>  Sat, 05 Mar 2011 18:42:43 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Mon, 07 Mar 2011 16:25:01 +0100
 
 xorg-server (2:1.9.4-3) unstable; urgency=low
 
