@@ -1,3 +1,54 @@
+commit b9c7485c68d0faf5c9f1f46fc7f39164b0e82a7a
+Author: Jeremy Huddleston <jeremyhu@apple.com>
+Date:   Thu Mar 17 13:54:05 2011 -0700
+
+    configure.ac: Bump version to 1.9.5
+    
+    Signed-off-by: Jeremy Huddleston <jeremyhu@apple.com>
+
+commit db9321b33047dadc791246c9830abcbd05ef76d1
+Author: Erkki Seppälä <erkki.seppala@vincit.fi>
+Date:   Thu Mar 10 11:40:40 2011 +0200
+
+    xfree86/modes: Fixed memory leak in xf86InitialConfiguration
+    
+    There were two memory leaks in the function: one was the lack of free
+    for "enabled", the other was the full lack of releasing anything when
+    configuration was too small. The first issue was fixed by adding the
+    missing free, the other was addressed by replacing the duplicate
+    memory releasing sequences with one that is gotoed into.
+    
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Rami Ylimäki <rami.ylimaki@vincit.fi>
+    Signed-off-by: Erkki Seppälä <erkki.seppala@vincit.fi>
+    Signed-off-by: Keith Packard <keithp@keithp.com>
+    (cherry picked from commit d3adf2d9350bee4125107e2ea1ed0c51bb736562)
+
+commit 8ffaef2ebd2611e2eed4ef97350c3a34508f5252
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Thu Feb 24 16:06:34 2011 -0500
+
+    vbe: Fix malloc size bug
+    
+    v2: Slightly more obvious sizing math.
+    
+    ==14882== Invalid write of size 2
+    ==14882==    at 0x6750267: VBEGetVBEInfo (vbe.c:400)
+    ==14882==    by 0x6142064: ??? (in /usr/lib64/xorg/modules/drivers/vesa_drv.so)
+    ==14882==    by 0x471895: InitOutput (xf86Init.c:519)
+    ==14882==    by 0x422778: main (main.c:205)
+    ==14882==  Address 0x4f32fa8 is 72 bytes inside a block of size 73 alloc'd
+    ==14882==    at 0x4A0640D: malloc (vg_replace_malloc.c:236)
+    ==14882==    by 0x675024B: VBEGetVBEInfo (vbe.c:398)
+    ==14882==    by 0x6142064: ??? (in /usr/lib64/xorg/modules/drivers/vesa_drv.so)
+    ==14882==    by 0x471895: InitOutput (xf86Init.c:519)
+    ==14882==    by 0x422778: main (main.c:205)
+    
+    Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+    Reviewed-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    (cherry picked from commit d8caa782009abf4dc17b945e325e83fda299a534)
+
 commit 6666424a31f93e0aa1bb394c6ade7ae029f90f70
 Author: Jeremy Huddleston <jeremyhu@apple.com>
 Date:   Fri Mar 4 13:42:45 2011 -0800
