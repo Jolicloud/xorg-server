@@ -77,8 +77,10 @@ Build-Depends:
  xkb-data,
  x11-xkb-utils,
 Standards-Version: 3.8.4
-Vcs-Git: git://git.debian.org/git/pkg-xorg/xserver/xorg-server
-Vcs-Browser: http://git.debian.org/?p=pkg-xorg/xserver/xorg-server.git
+XS-Debian-Vcs-Git: git://git.debian.org/git/pkg-xorg/xserver/xorg-server
+XS-Debian-Vcs-Browser: http://git.debian.org/?p=pkg-xorg/xserver/xorg-server.git
+Vcs-Git: git://github.com/jolicloud/xorg-server.git
+Vcs-Browser: https://github.com/jolicloud/xorg-server
 
 Package: xserver-xorg-core
 Architecture: any
